@@ -53,6 +53,9 @@ namespace BoggleClient
             {
                 // Connect to the Boggle Server
                 model.Connect(ipBox.Text, 2000, nameBox.Text);
+
+                // Hide the start Button
+                startButton.Invoke(new Action(() => { startButton.Visible = false; }));
             }
         }
 
@@ -63,7 +66,10 @@ namespace BoggleClient
         /// <param name="e"></param>
         private void exitButton_Click(object sender, EventArgs e)
         {
-            // TODO:
+            // Handle the leave early
+
+            // Show the start Button
+            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
         }
 
         /// <summary>
@@ -192,6 +198,9 @@ namespace BoggleClient
 
             // Display the summary to the user after the game has ended
             MessageBox.Show(SummaryMessage(summaryInfo));
+
+            // Hide the start button
+            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
         }
 
         /// <summary>
@@ -217,136 +226,156 @@ namespace BoggleClient
         #endregion
 
         #region Helpers
-
         /// <summary>
         /// Presents the game summary to the user
         /// </summary>
         /// <param name="text"></param>
-        private string SummaryMessage(string[] summaryInfo)
+        public string SummaryMessage(string[] summaryInfo)
         {
-            #region Client-Played Words
+            #region Client Played
+
+            string message = string.Empty;
+            int count = 0;
             int position = 0;
-            string message = "Client played " + summaryInfo[position] + " words: ";
 
-            // Initialize word limit to 0, in the case where the player played no valid words
-            int wordsPlayed;
-            position += 1;
+            message += "Client played " + summaryInfo[position] + " words: ";
 
-            // Attempt to receive the played number of words
-            int.TryParse(summaryInfo[0], out wordsPlayed);
+            int.TryParse(summaryInfo[position], out count);
 
-            // Loop through the array up to the limit, to grab all words and add them to the message string
-            for (; position <= wordsPlayed; position++)
+            // We need to increment the position if the count is 0 to get to the next amount of words
+            // We need to increment the position if the count is greater than 0 to begin iterating through the current list of words
+            position++;
+
+            // If the count was 0, do not enter the loop
+            // If the count was greater than 0, enter the loop and print the words
+
+            if (count > 0)
             {
-                message += summaryInfo[position] + " ";
+                // Loop through the array up to the count, to grab all words and add them to the message string
+                for (; position <= count; position++)
+                {
+                    message += summaryInfo[position] + " ";
+                }
             }
 
             message += "\n";
 
             #endregion
 
-            #region Opponent-Played Words
+            int countPos = position;
 
-            // Now go one past the client-played words to access the opponent-played words
-            if (wordsPlayed > 0)
-                position += 1;
+            #region Opponent Played
 
             message += "Opponent played " + summaryInfo[position] + " words: ";
 
-            // Attempt to receive the played number of words
-            int.TryParse(summaryInfo[position], out wordsPlayed);
+            int.TryParse(summaryInfo[position], out count);
 
-            wordsPlayed += position;
+            countPos = position + count;
 
-            // Increment the position
-            position += 1;
+            // We need to increment the position if the count is 0 to get to the next amount of words
+            // We need to increment the position if the count is greater than 0 to begin iterating through the current list of words
+            position++;
 
-            // Loop through the array up to the limit, to grab all words and add them to the message string
-            for (; position <= wordsPlayed; position++)
+            // If the count was 0, do not enter the loop
+            // If the count was greater than 0, enter the loop and print the words
+
+            if (count > 0)
             {
-                message += summaryInfo[position] + " ";
+                // Loop through the array up to the count, to grab all words and add them to the message string
+                for (; position <= countPos; position++)
+                {
+                    message += summaryInfo[position] + " ";
+                }
             }
 
             message += "\n";
+
             #endregion
 
-            #region Both-Played Words
-
-            // Now go one past the opponent-played words to access both-played words
-            if (wordsPlayed > 0)
-                position += 1;
+            #region Duplicates
 
             message += "Both played " + summaryInfo[position] + " duplicate words: ";
 
-            // Attempt to receive the played number of words
-            int.TryParse(summaryInfo[position], out wordsPlayed);
+            int.TryParse(summaryInfo[position], out count);
 
-            wordsPlayed += position;
+            countPos = position + count;
 
-            // Increment the position
-            position += 1;
+            // We need to increment the position if the count is 0 to get to the next amount of words
+            // We need to increment the position if the count is greater than 0 to begin iterating through the current list of words
+            position++;
 
-            // Loop through the array up to the limit, to grab all words and add them to the message string
-            for (; position <= wordsPlayed; position++)
+            // If the count was 0, do not enter the loop
+            // If the count was greater than 0, enter the loop and print the words
+
+            if (count > 0)
             {
-                message += summaryInfo[position] + " ";
+                // Loop through the array up to the count, to grab all words and add them to the message string
+                for (; position <= countPos; position++)
+                {
+                    message += summaryInfo[position] + " ";
+                }
             }
 
             message += "\n";
+
             #endregion
 
-            #region Client-Played Illegal Words
-
-            // Now go one past the both-played words to access client-played illegal words
-            if (wordsPlayed > 0)
-                position += 1;
+            #region Client Played Illegal
 
             message += "Client played " + summaryInfo[position] + " illegal words: ";
 
-            // Attempt to receive the played number of words
-            int.TryParse(summaryInfo[position], out wordsPlayed);
+            int.TryParse(summaryInfo[position], out count);
 
-            wordsPlayed += position;
+            countPos = position + count;
 
-            // Increment the position
-            position += 1;
+            // We need to increment the position if the count is 0 to get to the next amount of words
+            // We need to increment the position if the count is greater than 0 to begin iterating through the current list of words
+            position++;
 
-            // Loop through the array up to the limit, to grab all words and add them to the message string
-            for (; position <= wordsPlayed; position++)
+            // If the count was 0, do not enter the loop
+            // If the count was greater than 0, enter the loop and print the words
+
+            if (count > 0)
             {
-                message += summaryInfo[position] + " ";
+                // Loop through the array up to the count, to grab all words and add them to the message string
+                for (; position <= countPos; position++)
+                {
+                    message += summaryInfo[position] + " ";
+                }
             }
 
             message += "\n";
+
             #endregion
 
-            #region Opponent-Played Illegal Words
-
-            // Now go one past the client-played illegal words to access opponent-played illegal words
-            if (wordsPlayed > 0)
-                position += 1;
+            #region Opponent Played Illegal
 
             message += "Opponent played " + summaryInfo[position] + " illegal words: ";
 
-            // Attempt to receive the played number of words
-            int.TryParse(summaryInfo[position], out wordsPlayed);
+            int.TryParse(summaryInfo[position], out count);
 
-            wordsPlayed += position;
+            countPos = position + count;
 
-            // Increment the position if wordsPlayed is not 0
-            if (wordsPlayed != 0)
-                position += 1;
+            // We need to increment the position if the count is 0 to get to the next amount of words
+            // We need to increment the position if the count is greater than 0 to begin iterating through the current list of words
+            position++;
 
-            // Loop through the array up to the limit, to grab all words and add them to the message string
-            for (; position <= wordsPlayed; position++)
+            // If the count was 0, do not enter the loop
+            // If the count was greater than 0, enter the loop and print the words
+
+            if (count > 0)
             {
-                message += summaryInfo[position] + " ";
+                // Loop through the array up to the count, to grab all words and add them to the message string
+                for (; position <= countPos; position++)
+                {
+                    message += summaryInfo[position] + " ";
+                }
             }
 
             message += "\n";
+
             #endregion
 
-            // Display the summary to the user after the game has ended
             return message;
         }
 

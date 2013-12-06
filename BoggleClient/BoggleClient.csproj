@@ -90,10 +90,6 @@
       <Project>{02ba900b-cdd3-4fa7-ad61-df46f1de69dd}</Project>
       <Name>BoggleClientModel</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BoggleClientTest\BoggleClientTest.csproj">
-      <Project>{d703da78-5628-4d0b-8f8f-eac2285b2c98}</Project>
-      <Name>BoggleClientTest</Name>
-    </ProjectReference>
     <ProjectReference Include="..\BoggleServerTest\BoggleServerTest.csproj">
       <Project>{c8c29409-97e4-454f-bde0-69f033e395ef}</Project>
       <Name>BoggleServerTest</Name>
