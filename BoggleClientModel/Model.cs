@@ -25,7 +25,6 @@ namespace BoggleClientModel
         public event Action<String> IgnoreLineEvent;
         public event Action<String> TerminateLineEvent;
 
-
         /// <summary>
         /// Creates a not-yet-connected client model.
         /// </summary>
@@ -93,7 +92,7 @@ namespace BoggleClientModel
             else if (ScoreLineEvent != null && s.StartsWith("SCORE", true, null))
             {
                 // Store player score and opponent score
-                String[] scoreInfo = s.Substring(4).Trim().Split(' ');
+                String[] scoreInfo = s.Substring(5).Trim().Split(' ');
 
                 // Send score information to player
                 ScoreLineEvent(scoreInfo);
@@ -103,7 +102,7 @@ namespace BoggleClientModel
             else if (StopLineEvent != null && s.StartsWith("STOP", true, null))
             {
                 // Store player score and opponent score
-                String[] summaryInfo = s.Substring(3).Trim().Split(' ');
+                String[] summaryInfo = s.Substring(4).Trim().Split(' ');
 
                 // Send game summary to player
                 StopLineEvent(summaryInfo);
@@ -113,7 +112,7 @@ namespace BoggleClientModel
             else if (IgnoreLineEvent != null && s.StartsWith("IGNORING", true, null))
             {
                 // Send the input that will be ignored to the player
-                IgnoreLineEvent(s.Substring(7).Trim());
+                IgnoreLineEvent(s.Substring(8).Trim());
             }
 
             // Send the TerminatedLineEvent

@@ -108,6 +108,8 @@ namespace BoggleClient
             {
                 // Send the message to the server
                 model.SendMessage("WORD " + word);
+
+                wordBox.Text = "";
             }
             else
             {
@@ -126,7 +128,7 @@ namespace BoggleClient
         private void StartReceived(string[] startInfo)
         {
             // Invoke a text change for the game status
-            statusLabel.Invoke(new Action(() => { statusLabel.Text = "A Game Begins!"; }));
+            statusBox.Invoke(new Action(() => { statusBox.Text = "Begin Game"; statusBox.BackColor = Color.ForestGreen; }));
 
             #region Set Up Boggle Board
             // Set up the Boggle Board with startInfo[0]

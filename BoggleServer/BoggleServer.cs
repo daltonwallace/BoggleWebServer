@@ -179,6 +179,8 @@ namespace BB
             // Check if they asked to play
             if (s.StartsWith("play ", true, null))
             {
+                Console.WriteLine(s);
+
                 // Create a new player with the name and stringsocket
                 Player tempPlayer = new Player(currentSS, s.Substring(4).Trim());
 
@@ -322,7 +324,7 @@ namespace BB
                 }
 
                 // Check if the cmd line input was valid
-                if (s.StartsWith("word "))
+                if (s.StartsWith("word ", true, null))
                 {
                     string word = s.Substring(4).Trim().ToUpper();
 
