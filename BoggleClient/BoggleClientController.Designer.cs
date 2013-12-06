@@ -76,7 +76,7 @@
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 217F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 223F));
             this.tableLayoutPanel1.Controls.Add(this.ipLabel, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.nameLabel, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.ipBox, 1, 0);
@@ -127,7 +127,7 @@
             // 
             this.ipLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ipLabel.AutoSize = true;
-            this.ipLabel.Location = new System.Drawing.Point(16, 23);
+            this.ipLabel.Location = new System.Drawing.Point(15, 23);
             this.ipLabel.Name = "ipLabel";
             this.ipLabel.Size = new System.Drawing.Size(58, 13);
             this.ipLabel.TabIndex = 0;
@@ -149,18 +149,18 @@
             // 
             this.ipBox.AcceptsTab = true;
             this.ipBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ipBox.Location = new System.Drawing.Point(93, 20);
+            this.ipBox.Location = new System.Drawing.Point(92, 20);
             this.ipBox.Name = "ipBox";
-            this.ipBox.Size = new System.Drawing.Size(84, 20);
+            this.ipBox.Size = new System.Drawing.Size(83, 20);
             this.ipBox.TabIndex = 2;
             // 
             // nameBox
             // 
             this.nameBox.AcceptsTab = true;
             this.nameBox.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.nameBox.Location = new System.Drawing.Point(93, 80);
+            this.nameBox.Location = new System.Drawing.Point(92, 80);
             this.nameBox.Name = "nameBox";
-            this.nameBox.Size = new System.Drawing.Size(84, 20);
+            this.nameBox.Size = new System.Drawing.Size(83, 20);
             this.nameBox.TabIndex = 3;
             // 
             // statusLabel
@@ -179,10 +179,10 @@
             this.statusBox.AcceptsTab = true;
             this.statusBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.statusBox.Enabled = false;
-            this.statusBox.Location = new System.Drawing.Point(93, 140);
+            this.statusBox.Location = new System.Drawing.Point(92, 140);
             this.statusBox.Name = "statusBox";
             this.statusBox.ReadOnly = true;
-            this.statusBox.Size = new System.Drawing.Size(84, 20);
+            this.statusBox.Size = new System.Drawing.Size(83, 20);
             this.statusBox.TabIndex = 7;
             // 
             // letter1
@@ -193,9 +193,9 @@
             this.letter1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter1.ForeColor = System.Drawing.Color.Black;
             this.letter1.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter1.Location = new System.Drawing.Point(271, 60);
+            this.letter1.Location = new System.Drawing.Point(269, 60);
             this.letter1.Name = "letter1";
-            this.letter1.Size = new System.Drawing.Size(84, 60);
+            this.letter1.Size = new System.Drawing.Size(83, 60);
             this.letter1.TabIndex = 8;
             this.letter1.Text = "A";
             this.letter1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -208,9 +208,9 @@
             this.letter2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter2.ForeColor = System.Drawing.Color.White;
             this.letter2.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter2.Location = new System.Drawing.Point(361, 60);
+            this.letter2.Location = new System.Drawing.Point(358, 60);
             this.letter2.Name = "letter2";
-            this.letter2.Size = new System.Drawing.Size(84, 60);
+            this.letter2.Size = new System.Drawing.Size(83, 60);
             this.letter2.TabIndex = 9;
             this.letter2.Text = "B";
             this.letter2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -223,9 +223,9 @@
             this.letter3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter3.ForeColor = System.Drawing.Color.Black;
             this.letter3.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter3.Location = new System.Drawing.Point(451, 60);
+            this.letter3.Location = new System.Drawing.Point(447, 60);
             this.letter3.Name = "letter3";
-            this.letter3.Size = new System.Drawing.Size(84, 60);
+            this.letter3.Size = new System.Drawing.Size(83, 60);
             this.letter3.TabIndex = 10;
             this.letter3.Text = "C";
             this.letter3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -238,9 +238,9 @@
             this.letter4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter4.ForeColor = System.Drawing.Color.White;
             this.letter4.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter4.Location = new System.Drawing.Point(541, 60);
+            this.letter4.Location = new System.Drawing.Point(536, 60);
             this.letter4.Name = "letter4";
-            this.letter4.Size = new System.Drawing.Size(84, 60);
+            this.letter4.Size = new System.Drawing.Size(83, 60);
             this.letter4.TabIndex = 11;
             this.letter4.Text = "D";
             this.letter4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -253,9 +253,9 @@
             this.letter5.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter5.ForeColor = System.Drawing.Color.White;
             this.letter5.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter5.Location = new System.Drawing.Point(271, 120);
+            this.letter5.Location = new System.Drawing.Point(269, 120);
             this.letter5.Name = "letter5";
-            this.letter5.Size = new System.Drawing.Size(84, 60);
+            this.letter5.Size = new System.Drawing.Size(83, 60);
             this.letter5.TabIndex = 12;
             this.letter5.Text = "E";
             this.letter5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -268,9 +268,9 @@
             this.letter6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter6.ForeColor = System.Drawing.Color.Black;
             this.letter6.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter6.Location = new System.Drawing.Point(361, 120);
+            this.letter6.Location = new System.Drawing.Point(358, 120);
             this.letter6.Name = "letter6";
-            this.letter6.Size = new System.Drawing.Size(84, 60);
+            this.letter6.Size = new System.Drawing.Size(83, 60);
             this.letter6.TabIndex = 13;
             this.letter6.Text = "F";
             this.letter6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -283,9 +283,9 @@
             this.letter7.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter7.ForeColor = System.Drawing.Color.White;
             this.letter7.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter7.Location = new System.Drawing.Point(451, 120);
+            this.letter7.Location = new System.Drawing.Point(447, 120);
             this.letter7.Name = "letter7";
-            this.letter7.Size = new System.Drawing.Size(84, 60);
+            this.letter7.Size = new System.Drawing.Size(83, 60);
             this.letter7.TabIndex = 14;
             this.letter7.Text = "G";
             this.letter7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -298,9 +298,9 @@
             this.letter8.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter8.ForeColor = System.Drawing.Color.Black;
             this.letter8.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter8.Location = new System.Drawing.Point(541, 120);
+            this.letter8.Location = new System.Drawing.Point(536, 120);
             this.letter8.Name = "letter8";
-            this.letter8.Size = new System.Drawing.Size(84, 60);
+            this.letter8.Size = new System.Drawing.Size(83, 60);
             this.letter8.TabIndex = 15;
             this.letter8.Text = "H";
             this.letter8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -313,9 +313,9 @@
             this.letter9.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter9.ForeColor = System.Drawing.Color.Black;
             this.letter9.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter9.Location = new System.Drawing.Point(271, 180);
+            this.letter9.Location = new System.Drawing.Point(269, 180);
             this.letter9.Name = "letter9";
-            this.letter9.Size = new System.Drawing.Size(84, 60);
+            this.letter9.Size = new System.Drawing.Size(83, 60);
             this.letter9.TabIndex = 16;
             this.letter9.Text = "I";
             this.letter9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -328,9 +328,9 @@
             this.letter10.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter10.ForeColor = System.Drawing.Color.White;
             this.letter10.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter10.Location = new System.Drawing.Point(361, 180);
+            this.letter10.Location = new System.Drawing.Point(358, 180);
             this.letter10.Name = "letter10";
-            this.letter10.Size = new System.Drawing.Size(84, 60);
+            this.letter10.Size = new System.Drawing.Size(83, 60);
             this.letter10.TabIndex = 17;
             this.letter10.Text = "J";
             this.letter10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -343,9 +343,9 @@
             this.letter11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter11.ForeColor = System.Drawing.Color.Black;
             this.letter11.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter11.Location = new System.Drawing.Point(451, 180);
+            this.letter11.Location = new System.Drawing.Point(447, 180);
             this.letter11.Name = "letter11";
-            this.letter11.Size = new System.Drawing.Size(84, 60);
+            this.letter11.Size = new System.Drawing.Size(83, 60);
             this.letter11.TabIndex = 18;
             this.letter11.Text = "K";
             this.letter11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -358,9 +358,9 @@
             this.letter12.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter12.ForeColor = System.Drawing.Color.White;
             this.letter12.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter12.Location = new System.Drawing.Point(541, 180);
+            this.letter12.Location = new System.Drawing.Point(536, 180);
             this.letter12.Name = "letter12";
-            this.letter12.Size = new System.Drawing.Size(84, 60);
+            this.letter12.Size = new System.Drawing.Size(83, 60);
             this.letter12.TabIndex = 19;
             this.letter12.Text = "L";
             this.letter12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -373,9 +373,9 @@
             this.letter13.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter13.ForeColor = System.Drawing.Color.White;
             this.letter13.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter13.Location = new System.Drawing.Point(271, 240);
+            this.letter13.Location = new System.Drawing.Point(269, 240);
             this.letter13.Name = "letter13";
-            this.letter13.Size = new System.Drawing.Size(84, 60);
+            this.letter13.Size = new System.Drawing.Size(83, 60);
             this.letter13.TabIndex = 20;
             this.letter13.Text = "M";
             this.letter13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -388,9 +388,9 @@
             this.letter14.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter14.ForeColor = System.Drawing.Color.Black;
             this.letter14.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter14.Location = new System.Drawing.Point(361, 240);
+            this.letter14.Location = new System.Drawing.Point(358, 240);
             this.letter14.Name = "letter14";
-            this.letter14.Size = new System.Drawing.Size(84, 60);
+            this.letter14.Size = new System.Drawing.Size(83, 60);
             this.letter14.TabIndex = 21;
             this.letter14.Text = "N";
             this.letter14.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -403,9 +403,9 @@
             this.letter15.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter15.ForeColor = System.Drawing.Color.White;
             this.letter15.Image = global::BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0;
-            this.letter15.Location = new System.Drawing.Point(451, 240);
+            this.letter15.Location = new System.Drawing.Point(447, 240);
             this.letter15.Name = "letter15";
-            this.letter15.Size = new System.Drawing.Size(84, 60);
+            this.letter15.Size = new System.Drawing.Size(83, 60);
             this.letter15.TabIndex = 22;
             this.letter15.Text = "O";
             this.letter15.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -418,9 +418,9 @@
             this.letter16.Dock = System.Windows.Forms.DockStyle.Fill;
             this.letter16.ForeColor = System.Drawing.Color.Black;
             this.letter16.Image = global::BoggleClient.Properties.Resources.volakasajaxwhite;
-            this.letter16.Location = new System.Drawing.Point(541, 240);
+            this.letter16.Location = new System.Drawing.Point(536, 240);
             this.letter16.Name = "letter16";
-            this.letter16.Size = new System.Drawing.Size(84, 60);
+            this.letter16.Size = new System.Drawing.Size(83, 60);
             this.letter16.TabIndex = 23;
             this.letter16.Text = "P";
             this.letter16.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -429,18 +429,18 @@
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.wordBox, 4);
             this.wordBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.wordBox.Location = new System.Drawing.Point(271, 363);
+            this.wordBox.Location = new System.Drawing.Point(269, 363);
             this.wordBox.Name = "wordBox";
-            this.wordBox.Size = new System.Drawing.Size(354, 20);
+            this.wordBox.Size = new System.Drawing.Size(350, 20);
             this.wordBox.TabIndex = 24;
             this.wordBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.BoggleClientController_KeyDown);
             // 
             // enterButton
             // 
             this.enterButton.Dock = System.Windows.Forms.DockStyle.Top;
-            this.enterButton.Location = new System.Drawing.Point(631, 363);
+            this.enterButton.Location = new System.Drawing.Point(625, 363);
             this.enterButton.Name = "enterButton";
-            this.enterButton.Size = new System.Drawing.Size(217, 23);
+            this.enterButton.Size = new System.Drawing.Size(223, 23);
             this.enterButton.TabIndex = 25;
             this.enterButton.Text = "Enter";
             this.enterButton.UseVisualStyleBackColor = true;
@@ -450,7 +450,7 @@
             // 
             this.timeLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.timeLabel.AutoSize = true;
-            this.timeLabel.Location = new System.Drawing.Point(30, 203);
+            this.timeLabel.Location = new System.Drawing.Point(29, 203);
             this.timeLabel.Name = "timeLabel";
             this.timeLabel.Size = new System.Drawing.Size(30, 13);
             this.timeLabel.TabIndex = 26;
@@ -472,30 +472,30 @@
             // 
             this.timeBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.timeBox.Enabled = false;
-            this.timeBox.Location = new System.Drawing.Point(93, 200);
+            this.timeBox.Location = new System.Drawing.Point(92, 200);
             this.timeBox.Name = "timeBox";
             this.timeBox.ReadOnly = true;
-            this.timeBox.Size = new System.Drawing.Size(84, 20);
+            this.timeBox.Size = new System.Drawing.Size(83, 20);
             this.timeBox.TabIndex = 28;
             // 
             // playerScoreBox
             // 
             this.playerScoreBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.playerScoreBox.Enabled = false;
-            this.playerScoreBox.Location = new System.Drawing.Point(93, 260);
+            this.playerScoreBox.Location = new System.Drawing.Point(92, 260);
             this.playerScoreBox.Name = "playerScoreBox";
             this.playerScoreBox.ReadOnly = true;
-            this.playerScoreBox.Size = new System.Drawing.Size(84, 20);
+            this.playerScoreBox.Size = new System.Drawing.Size(83, 20);
             this.playerScoreBox.TabIndex = 30;
             // 
             // opponentScoreBox
             // 
             this.opponentScoreBox.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.opponentScoreBox.Enabled = false;
-            this.opponentScoreBox.Location = new System.Drawing.Point(93, 320);
+            this.opponentScoreBox.Location = new System.Drawing.Point(92, 320);
             this.opponentScoreBox.Name = "opponentScoreBox";
             this.opponentScoreBox.ReadOnly = true;
-            this.opponentScoreBox.Size = new System.Drawing.Size(84, 20);
+            this.opponentScoreBox.Size = new System.Drawing.Size(83, 20);
             this.opponentScoreBox.TabIndex = 29;
             // 
             // opponentScoreLabel
@@ -523,13 +523,13 @@
             // exitButton
             // 
             this.exitButton.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.exitButton.Location = new System.Drawing.Point(97, 363);
+            this.exitButton.Location = new System.Drawing.Point(96, 363);
             this.exitButton.Name = "exitButton";
             this.exitButton.Size = new System.Drawing.Size(75, 23);
             this.exitButton.TabIndex = 5;
             this.exitButton.Text = "Exit";
             this.exitButton.UseVisualStyleBackColor = true;
-            this.exitButton.Click += new System.EventHandler(this.exitButton_Click_1);
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // BoggleClientController
             // 

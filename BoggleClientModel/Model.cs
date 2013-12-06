@@ -38,6 +38,8 @@ namespace BoggleClientModel
         /// </summary>
         public void Connect(string hostname, int port, String name)
         {
+            socket = null;
+
             if (socket == null)
             {
                 TcpClient client = new TcpClient(hostname, port);
@@ -45,6 +47,8 @@ namespace BoggleClientModel
                 socket.BeginSend("play " + name + "\n", (e, p) => { }, null);
                 socket.BeginReceive(LineReceived, null);
             }
+
+            
         }
 
         /// <summary>
@@ -67,7 +71,9 @@ namespace BoggleClientModel
             // If the string is null keep listening and return
             if (s == null)
             {
-                socket.BeginReceive(LineReceived, null);
+                if(socket != null)
+                    socket.BeginReceive(LineReceived, null);
+
                 return;
             }
 
