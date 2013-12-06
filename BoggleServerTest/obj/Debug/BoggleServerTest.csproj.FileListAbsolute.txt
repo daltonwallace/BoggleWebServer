@@ -1,0 +1,11 @@
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\BoggleServerTest.dll
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\BoggleServerTest.pdb
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\BoggleServer.exe
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\StringSocket.dll
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\BoggleBoard.dll
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\BoggleServer.pdb
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\StringSocket.pdb
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\bin\Debug\BoggleBoard.pdb
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\obj\Debug\BoggleServerTest.csprojResolveAssemblyReference.cache
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\obj\Debug\BoggleServerTest.dll
+C:\Users\Brandon\Desktop\PS9\BoggleServerTest\obj\Debug\BoggleServerTest.pdb

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{36572DEF-15EE-4EE7-A5DF-37E69409727D}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BoggleClient</RootNamespace>
+    <AssemblyName>BoggleClient</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="StringSocket">
+      <HintPath>..\StringSocket.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BoggleClientController.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BoggleClientController.Designer.cs">
+      <DependentUpon>BoggleClientController.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BoggleClientView.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BoggleClientController.resx">
+      <DependentUpon>BoggleClientController.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoggleBoard\BoggleBoard.csproj">
+      <Project>{bcb81a58-8bd5-4075-a95c-17ac11c4bcab}</Project>
+      <Name>BoggleBoard</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoggleClientModel\BoggleClientModel.csproj">
+      <Project>{02ba900b-cdd3-4fa7-ad61-df46f1de69dd}</Project>
+      <Name>BoggleClientModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoggleClientTest\BoggleClientTest.csproj">
+      <Project>{d703da78-5628-4d0b-8f8f-eac2285b2c98}</Project>
+      <Name>BoggleClientTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoggleServerTest\BoggleServerTest.csproj">
+      <Project>{c8c29409-97e4-454f-bde0-69f033e395ef}</Project>
+      <Name>BoggleServerTest</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BoggleServer\BoggleServer.csproj">
+      <Project>{c77371eb-900e-427d-ac13-5f0878deea24}</Project>
+      <Name>BoggleServer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Town.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Retro.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ace of Spades.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Classic Video Games.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Paper Airplane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Picturesque.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Geometry.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\woodBackground.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Carrara-White-CD-Marble-Slab.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Ariston-White-Marble-Slab-Tile.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volakasajaxwhite.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Slab_Taurus_Black_travertine_marble_slab_pavers_24971694-f030-4543-9476-4c34305cd315_new_0.jpg" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
