@@ -52,6 +52,19 @@ namespace BoggleClientModel
         }
 
         /// <summary>
+        /// Disconnect from the server.
+        /// </summary>
+        public void Disconnect()
+        {
+            if (socket != null)
+            {
+                socket.Close();
+            }
+
+
+        }
+
+        /// <summary>
         /// Send a line of text to the server.
         /// </summary>
         /// <param name="line"></param>

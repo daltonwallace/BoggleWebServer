@@ -35,6 +35,8 @@ namespace BB
         private int gameTime;
         private static HashSet<string> dictionaryFile;
         private string optionalBoggleBoard;
+        private bool gameStarted;
+        Player waitingPlayer;
 
         #endregion
 
@@ -47,7 +49,7 @@ namespace BB
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            args = new String[] { "45", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
+            args = new String[] { "30", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
 
             // Check to see that the appropriate number of arguments has been passed
             // to the server via the string[] args
@@ -86,6 +88,7 @@ namespace BB
             // Assign to global variables:
             int.TryParse(gameLength, out gameTime);
             dictionaryFile = new HashSet<string>();
+            gameStarted = false;
 
             // Attempt to create dictionary from file
             try
@@ -115,7 +118,6 @@ namespace BB
             // Instantiate variables
             playerQueue = new Queue<Player>();
             playerQueueLock = new Object();
-
 
             // A TcpListener listening for any incoming connections
             boggleServer = new TcpListener(IPAddress.Any, 2000);
@@ -165,17 +167,6 @@ namespace BB
             // Cast the payload as a String Socket
             StringSocket currentSS = (StringSocket)payload;
 
-            // If someone removes themself from a the server
-            // before a game has started
-            //if (s == null)
-            //{
-            //    lock (playerQueueLock)
-            //    {
-            //        playerQueue.Dequeue();
-            //    }
-            //    return;
-            //}
-
             // Check if they asked to play
             if (s.StartsWith("play ", true, null))
             {
@@ -188,6 +179,16 @@ namespace BB
                 {
                     // Now that the player is ready, place them in the queue             
                     playerQueue.Enqueue(tempPlayer);
+
+                    // Special callback if the player queue is of size 1
+                    if (playerQueue.Count == 1)
+                    {
+                        // Set waiting player
+                        waitingPlayer = tempPlayer;
+
+                        // BeginReceive with special callback
+                        currentSS.BeginReceive(waitingPlayerMessageReceived, waitingPlayer);
+                    }
                 }
             }
             // If we didn't receive a play command then keep listening for additional commands
@@ -195,6 +196,7 @@ namespace BB
             {
                 // The client has deviated from the protocol - send IGNORING message.
                 currentSS.BeginSend("IGNORING " + s + "\n", (exc, o) => { }, 2);
+
                 currentSS.BeginReceive(messageRetreived, currentSS);
             }
 
@@ -206,13 +208,44 @@ namespace BB
                 // Dequeue both StringSockets and get that game goin!
                 lock (playerQueueLock)
                 {
+                    Player p1 = playerQueue.Dequeue();
+                    Player p2 = playerQueue.Dequeue();
+
                     // Create a new game
-                    Game g = new Game(playerQueue.Dequeue(), playerQueue.Dequeue(), optionalBoggleBoard, this.gameTime);
+                    Game g = new Game(p1, p2, optionalBoggleBoard, this.gameTime);
+
+                    // Assign the game to both players
+                    p1.Game = g;
+                    p2.Game = g;
 
                     // Begin a new game on a new thread
                     Thread t = new Thread(new ThreadStart(g.GameOn));
                     t.Start();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Special callback to handle if the waiting player disconnects before a game starts
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        /// <param name="payload"></param>
+        private void waitingPlayerMessageReceived(string s, Exception e, object payload)
+        {
+            // If someone removes themself from a the server
+            // before a game has started
+            if (s == null && e == null)
+            {
+                lock (playerQueueLock)
+                {
+                    if (playerQueue.Count > 0)
+                    {
+                        playerQueue.Dequeue();
+                        Console.WriteLine("Player dequeud");
+                    }                  
+                }
+                return;
             }
         }
 
@@ -289,7 +322,7 @@ namespace BB
 
             }
 
-            private void gameMessageReceived(string s, Exception e, object payload)
+            public void gameMessageReceived(string s, Exception e, object payload)
             {
 
                 // Writes player input to server console
@@ -523,6 +556,7 @@ namespace BB
             private HashSet<string> legalWords;
             private HashSet<string> illegalWords;
             private HashSet<string> duplicateWords;
+            Game game;
 
             /// <summary>
             /// Constructor requires a StringSocket object and the player's name.
@@ -538,7 +572,7 @@ namespace BB
                 this.illegalWords = new HashSet<string>();
                 this.duplicateWords = new HashSet<string>();
                 this.score = 0;
-
+                game = null;
             }
 
             /// <summary>
@@ -555,6 +589,15 @@ namespace BB
             public string Name
             {
                 get { return name; }
+            }
+
+            /// <summary>
+            /// Property which returns the players game
+            /// </summary>
+            public Game Game
+            {
+                get { return game; }
+                set { game = value; }
             }
 
             /// <summary>

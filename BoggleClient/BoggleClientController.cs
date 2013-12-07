@@ -51,11 +51,11 @@ namespace BoggleClient
             // Validate that the IP and player name boxes are not empty
             if (ipBox.Text != string.Empty && nameBox.Text != string.Empty)
             {
-                // Connect to the Boggle Server
-                model.Connect(ipBox.Text, 2000, nameBox.Text);
-
                 // Hide the start Button
                 startButton.Invoke(new Action(() => { startButton.Visible = false; }));
+
+                // Connect to the Boggle Server
+                model.Connect(ipBox.Text, 2000, nameBox.Text);
             }
         }
 
@@ -67,9 +67,13 @@ namespace BoggleClient
         private void exitButton_Click(object sender, EventArgs e)
         {
             // Handle the leave early
+            model.Disconnect();
 
             // Show the start Button
             startButton.Invoke(new Action(() => { startButton.Visible = true; }));
+
+            // Change the status to disconnected
+            statusBox.Invoke(new Action(() => { statusBox.Text = "Disconnected"; statusBox.BackColor = Color.White; }));
         }
 
         /// <summary>
