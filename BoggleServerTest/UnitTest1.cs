@@ -1138,7 +1138,7 @@ namespace BoggleServerTest
         public void TestABetterWay()
         {
             new Test7Class().run(2000);
-            new Test8Class().run(2000);
+            //new Test8Class().run(2000);
         }
 
         public class Test7Class

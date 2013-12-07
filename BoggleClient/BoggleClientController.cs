@@ -46,7 +46,7 @@ namespace BoggleClient
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void startButton_Click(object sender, EventArgs e)
+        public void startButton_Click(object sender, EventArgs e)
         {
             // Validate that the IP and player name boxes are not empty
             if (ipBox.Text != string.Empty && nameBox.Text != string.Empty)
@@ -74,6 +74,8 @@ namespace BoggleClient
 
             // Change the status to disconnected
             statusBox.Invoke(new Action(() => { statusBox.Text = "Disconnected"; statusBox.BackColor = Color.White; }));
+
+            wordBox.Invoke(new Action(() => { wordBox.Enabled = false; }));
         }
 
         /// <summary>
@@ -103,6 +105,17 @@ namespace BoggleClient
             }
         }
 
+        /// <summary>
+        /// Handle closing the form by disconnecting the model and dequeuing the player if he was enqueued
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BoggleClientController_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Handle the leave early
+            model.Disconnect();
+        }
+
         #endregion
 
         #region Attempt To Send Word
@@ -118,13 +131,9 @@ namespace BoggleClient
             {
                 // Send the message to the server
                 model.SendMessage("WORD " + word);
+            }
 
-                wordBox.Text = "";
-            }
-            else
-            {
-                // Turn wordBox red to notify that nothing was sent
-            }
+            wordBox.Text = "";
         }
 
         #endregion
@@ -138,7 +147,8 @@ namespace BoggleClient
         private void StartReceived(string[] startInfo)
         {
             // Invoke a text change for the game status
-            statusBox.Invoke(new Action(() => { statusBox.Text = "Begin Game"; statusBox.BackColor = Color.ForestGreen; }));
+            statusBox.Invoke(new Action(() => { statusBox.Text = "Begin Game"; }));
+            wordBox.Invoke(new Action(() => { wordBox.Enabled = true; }));
 
             #region Set Up Boggle Board
             // Set up the Boggle Board with startInfo[0]
@@ -200,6 +210,8 @@ namespace BoggleClient
         {
             statusBox.Invoke(new Action(() => { statusBox.BackColor = Color.White; }));
 
+            wordBox.Invoke(new Action(() => { wordBox.Enabled = false; }));
+
             // Display the summary to the user after the game has ended
             MessageBox.Show(SummaryMessage(summaryInfo));
 
@@ -225,6 +237,9 @@ namespace BoggleClient
         {
             // Display Pop Up 
             MessageBox.Show("Your opponent has left the game");
+
+            // Show the start Button
+            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
         }
 
         #endregion
@@ -383,6 +398,6 @@ namespace BoggleClient
             return message;
         }
 
-        #endregion
+        #endregion   
     }
 }

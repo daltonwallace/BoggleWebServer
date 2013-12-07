@@ -49,7 +49,7 @@ namespace BB
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            args = new String[] { "30", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
+            //args = new String[] { "120", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
 
             // Check to see that the appropriate number of arguments has been passed
             // to the server via the string[] args
@@ -147,9 +147,6 @@ namespace BB
             // Start listening to that player
             ss.BeginReceive(messageRetreived, ss);
 
-            // Send them a welcome message
-            //ss.BeginSend("Welcome To Our Boggle Server \r\n", (e, o) => { }, 2);
-
             // Start listening for more incoming connections
             boggleServer.BeginAcceptSocket(ConnectionRequested, null);
         }
@@ -181,14 +178,14 @@ namespace BB
                     playerQueue.Enqueue(tempPlayer);
 
                     // Special callback if the player queue is of size 1
-                    if (playerQueue.Count == 1)
-                    {
-                        // Set waiting player
-                        waitingPlayer = tempPlayer;
+                    //if (playerQueue.Count == 1)
+                    //{
+                    //    // Set waiting player
+                    //    waitingPlayer = tempPlayer;
 
-                        // BeginReceive with special callback
-                        currentSS.BeginReceive(waitingPlayerMessageReceived, waitingPlayer);
-                    }
+                    //    // BeginReceive with special callback
+                    //    currentSS.BeginReceive(waitingPlayerMessageReceived, waitingPlayer);
+                    //}
                 }
             }
             // If we didn't receive a play command then keep listening for additional commands

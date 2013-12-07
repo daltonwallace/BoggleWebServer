@@ -14,3 +14,7 @@ C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debu
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\BoggleClient.pdb
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\BoggleClientModel.pdb
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\StringSocket.pdb
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\BoggleServer.exe
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\BoggleBoard.dll
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\BoggleServer.pdb
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClientTest\bin\Debug\BoggleBoard.pdb

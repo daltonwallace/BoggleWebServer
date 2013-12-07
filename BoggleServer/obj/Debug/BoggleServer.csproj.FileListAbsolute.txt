@@ -18,3 +18,5 @@ C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleServer\bin\Debug\St
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleServer\obj\Debug\BoggleServer.csprojResolveAssemblyReference.cache
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleServer\obj\Debug\BoggleServer.exe
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleServer\obj\Debug\BoggleServer.pdb
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleServer\bin\Debug\BoggleClientModel.dll
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleServer\bin\Debug\BoggleClientModel.pdb

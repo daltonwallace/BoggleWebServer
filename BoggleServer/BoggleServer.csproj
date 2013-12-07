@@ -56,6 +56,10 @@
       <Project>{bcb81a58-8bd5-4075-a95c-17ac11c4bcab}</Project>
       <Name>BoggleBoard</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BoggleClientModel\BoggleClientModel.csproj">
+      <Project>{02ba900b-cdd3-4fa7-ad61-df46f1de69dd}</Project>
+      <Name>BoggleClientModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -25,6 +25,7 @@ namespace BoggleClientModel
         public event Action<String> IgnoreLineEvent;
         public event Action<String> TerminateLineEvent;
 
+
         /// <summary>
         /// Creates a not-yet-connected client model.
         /// </summary>
@@ -60,8 +61,6 @@ namespace BoggleClientModel
             {
                 socket.Close();
             }
-
-
         }
 
         /// <summary>
@@ -79,7 +78,7 @@ namespace BoggleClientModel
         /// <summary>
         /// Deal with an arriving line of text.
         /// </summary>
-        private void LineReceived(String s, Exception e, object p)
+        public void LineReceived(String s, Exception e, object p)
         {
             // If the string is null keep listening and return
             if (s == null)
@@ -144,5 +143,6 @@ namespace BoggleClientModel
             // Continue listening
             socket.BeginReceive(LineReceived, null);
         }
+
     }
 }
