@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BoggleClientModel</name>
+    </assembly>
+    <members>
+        <member name="T:BoggleClientModel.Model">
+            <summary>
+            Model used to communicate with the Boggle Server
+            </summary>
+        </member>
+        <member name="M:BoggleClientModel.Model.#ctor">
+            <summary>
+            Creates a not-yet-connected client model.
+            </summary>
+        </member>
+        <member name="M:BoggleClientModel.Model.Connect(System.String,System.Int32,System.String)">
+            <summary>
+            Connect to the server at the given hostname and port and with the given player name.
+            </summary>
+        </member>
+        <member name="M:BoggleClientModel.Model.Disconnect">
+            <summary>
+            Disconnect from the server.
+            </summary>
+        </member>
+        <member name="M:BoggleClientModel.Model.SendMessage(System.String)">
+            <summary>
+            Send a line of text to the server.
+            </summary>
+            <param name="line"></param>
+        </member>
+        <member name="M:BoggleClientModel.Model.LineReceived(System.String,System.Exception,System.Object)">
+            <summary>
+            Deal with an arriving line of text.
+            </summary>
+        </member>
+    </members>
+</doc>

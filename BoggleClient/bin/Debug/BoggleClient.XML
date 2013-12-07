@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BoggleClient</name>
+    </assembly>
+    <members>
+        <member name="M:BoggleClient.BoggleClientController.#ctor">
+            <summary>
+            Creates a new model and registers various line events
+            </summary>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.startButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Connect to the server and enter the player in the queue
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.exitButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Exit the player from the current game or player queue
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.enterButton_Click(System.Object,System.EventArgs)">
+            <summary>
+            Send a word play to the server
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.BoggleClientController_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+            <summary>
+            If the player hit enter, then the word in the wordBox will be sent to the server
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.BoggleClientController_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
+            <summary>
+            Handle closing the form by disconnecting the model and dequeuing the player if he was enqueued
+            </summary>
+            <param name="sender"></param>
+            <param name="e"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.sendWord(System.String)">
+            <summary>
+            Sends the word to the server, or turns the wordBox red
+            </summary>
+            <param name="word"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.StartReceived(System.String[])">
+            <summary>
+            Changes the status label for starting the game.
+            </summary>
+            <param name="startInfo"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.TimeReceived(System.String)">
+            <summary>
+            Updates the time label during the game
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.ScoreReceived(System.String[])">
+            <summary>
+            Updates the score during the game
+            </summary>
+            <param name="scores"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.StopReceived(System.String[])">
+            <summary>
+            Presents the game summary to the user
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.IgnoreReceived(System.String)">
+            <summary>
+            Notify the user that we are ignoring the submission
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.TerminateReceived(System.String)">
+            <summary>
+            Notify the user that the game has ended prematurely
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.SummaryMessage(System.String[])">
+            <summary>
+            Presents the game summary to the user
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="F:BoggleClient.BoggleClientController.components">
+            <summary>
+            Required designer variable.
+            </summary>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.Dispose(System.Boolean)">
+            <summary>
+            Clean up any resources being used.
+            </summary>
+            <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.InitializeComponent">
+            <summary>
+            Required method for Designer support - do not modify
+            the contents of this method with the code editor.
+            </summary>
+        </member>
+        <member name="M:BoggleClient.BoggleClientView.Main">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:BoggleClient.Properties.Resources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Ace_of_Spades">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Ariston_White_Marble_Slab_Tile">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Carrara_White_CD_Marble_Slab">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Classic_Video_Games">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Geometry">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Paper_Airplane">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Picturesque">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Retro">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Slab_Taurus_Black_travertine_marble_slab_pavers_24971694_f030_4543_9476_4c34305cd315_new_0">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.Town">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.volakasajaxwhite">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+        <member name="P:BoggleClient.Properties.Resources.woodBackground">
+            <summary>
+              Looks up a localized resource of type System.Drawing.Bitmap.
+            </summary>
+        </member>
+    </members>
+</doc>

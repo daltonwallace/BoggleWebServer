@@ -38,3 +38,8 @@ C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\obj\Debug\Bo
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\obj\Debug\BoggleClient.BoggleClientController.resources
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\obj\Debug\BoggleClient.Properties.Resources.resources
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\obj\Debug\BoggleClient.csproj.GenerateResource.Cache
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.XML
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleBoard.xml
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClientModel.xml
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleServerTest.xml
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleServer.xml

@@ -48,8 +48,6 @@ namespace BoggleClientModel
                 socket.BeginSend("play " + name + "\n", (e, p) => { }, null);
                 socket.BeginReceive(LineReceived, null);
             }
-
-            
         }
 
         /// <summary>

@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BoggleServer</name>
+    </assembly>
+    <members>
+        <member name="T:BB.BoggleServer">
+            <summary>
+            New comment for PS9
+            </summary>
+        </member>
+        <member name="M:BB.BoggleServer.Main(System.String[])">
+            <summary>
+            Receives argument from user.  Requires 2 - 3 arguments to begin boggle game,
+            otherwise it will throw an exception.
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:BB.BoggleServer.#ctor(System.String,System.String,System.String)">
+            <summary>
+            Constructor that creates a BoggleServer that listens for connection requests on port 2000
+            </summary>
+        </member>
+        <member name="M:BB.BoggleServer.ConnectionRequested(System.IAsyncResult)">
+            <summary>
+            This method is called when boggleServer.BeginAcceptSocket receives an incoming connection
+            to the server
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:BB.BoggleServer.messageRetreived(System.String,System.Exception,System.Object)">
+            <summary>
+            This method should enqueue a player in our player pool if they have
+            requested to play with a player name and place them on a new thread
+            with a game if there exists a second player on the queue.
+            </summary>
+            <param name="s"></param>
+            <param name="e"></param>
+            <param name="payload"></param>
+        </member>
+        <member name="M:BB.BoggleServer.waitingPlayerMessageReceived(System.String,System.Exception,System.Object)">
+            <summary>
+            Special callback to handle if the waiting player disconnects before a game starts
+            </summary>
+            <param name="s"></param>
+            <param name="e"></param>
+            <param name="payload"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Stop">
+            <summary>
+            Stop the TCP Listener
+            </summary>
+        </member>
+        <member name="T:BB.BoggleServer.Game">
+            <summary>
+             This encapsulates two players and a method to begin the game
+            </summary>
+        </member>
+        <member name="M:BB.BoggleServer.Game.#ctor(BB.BoggleServer.Player,BB.BoggleServer.Player,System.String,System.Int32)">
+            <summary>
+            Starts a new game, keeping track of two players and their scores as well as the time limit for the game
+            </summary>
+            <param name="player1"></param>
+            <param name="player2"></param>
+            <param name="_optionalBoggleBoard"></param>
+            <param name="_gameTime"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.GameOn">
+            <summary>
+            Controls a game of boggle between two players
+            </summary>
+            <param name="player1"></param>
+            <param name="player2"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.AddScore(System.String)">
+            <summary>
+            Returns a positive value for a legal word.
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.SubScore(System.String)">
+            <summary>
+            Returns a negative value for an illegal word.
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.timeElapsed(System.Object,System.Timers.ElapsedEventArgs)">
+            <summary>
+            Timer invoked method every 1000 milliseconds
+            </summary>
+            <param name="state"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.playerOneSummary">
+            <summary>
+            Ends the game for two players by printing all stats and closing the both sockets.
+            </summary>
+        </member>
+        <member name="M:BB.BoggleServer.Game.playerTwoSummary">
+            <summary>
+            Prints the stats for the second player and then closes the string sockets
+            </summary>
+        </member>
+        <member name="M:BB.BoggleServer.Game.printStats(BB.BoggleServer.Player,BB.BoggleServer.Player,System.Collections.Generic.HashSet{System.String})">
+            <summary>
+            Prints the count and enumerates all words within a given collection and sends it to the client of the indicated player.
+            </summary>
+            <param name="sendPlayer"></param>
+            <param name="collectionPlayer"></param>
+            <param name="collection"></param>
+        </member>
+        <member name="T:BB.BoggleServer.Player">
+            <summary>
+            Encapsulating class holding a players name and associated string socket
+            </summary>
+        </member>
+        <member name="M:BB.BoggleServer.Player.#ctor(CustomNetworking.StringSocket,System.String)">
+            <summary>
+            Constructor requires a StringSocket object and the player's name.
+            </summary>
+            <param name="payloadReceive"></param>
+            <param name="method"></param>
+        </member>
+        <member name="P:BB.BoggleServer.Player.StringSocket">
+            <summary>
+            Property which returns the payload identifier.
+            </summary>
+        </member>
+        <member name="P:BB.BoggleServer.Player.Name">
+            <summary>
+            Property which returns the request callback.
+            </summary>
+        </member>
+        <member name="P:BB.BoggleServer.Player.Game">
+            <summary>
+            Property which returns the players game
+            </summary>
+        </member>
+        <member name="P:BB.BoggleServer.Player.LegalWords">
+            <summary>
+            Property which returns the set of legal words played by this player.
+            </summary>
+        </member>
+        <member name="P:BB.BoggleServer.Player.IllegalWords">
+            <summary>
+            Property which returns the set of illegal words played by this player.
+            </summary>
+        </member>
+        <member name="P:BB.BoggleServer.Player.DuplicateWords">
+            <summary>
+            Property which returns the duplicate words played by the player.
+            </summary>
+        </member>
+        <member name="P:BB.BoggleServer.Player.Score">
+            <summary>
+            Property which returns the player's score.
+            </summary>
+        </member>
+    </members>
+</doc>

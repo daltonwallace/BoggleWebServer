@@ -1,0 +1,627 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BoggleClientTest</name>
+    </assembly>
+    <members>
+        <member name="M:BoggleClientTest.UIMap.OnePlayerConnect">
+            <summary>
+            OnePlayerConnect - Use 'OnePlayerConnectParams' to pass parameters into this method.
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UIMap.PlayerEnqueuedAndDequeued">
+            <summary>
+            Testing of player joining the boggle server.
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UIMap.ClosingBoard">
+            <summary>
+            Closed the boggle board
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UIMap.PlayerGame">
+            <summary>
+            PlayerGame - Use 'PlayerGameParams' to pass parameters into this method.
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UIMap.CloseGame">
+            <summary>
+            CloseGame
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UIMap.SampleGame">
+            <summary>
+            Added client, added words, exited game prematurely.
+            </summary>
+        </member>
+        <member name="T:BoggleClientTest.OnePlayerConnectParams">
+            <summary>
+            Parameters to be passed into 'OnePlayerConnect'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.OnePlayerConnectParams.UIIpBoxEditText">
+            <summary>
+            Type 'localhost' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.OnePlayerConnectParams.UINameBoxEditText">
+            <summary>
+            Type 'dalton' in 'nameBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.OnePlayerConnectParams.UIWordBoxEditText">
+            <summary>
+            Type 'word' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="T:BoggleClientTest.PlayerEnqueuedAndDequeuedParams">
+            <summary>
+            Parameters to be passed into 'PlayerEnqueuedAndDequeued'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UIBoggleViewWindowExePath">
+            <summary>
+            Launch '%USERPROFILE%\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.exe'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UIBoggleViewWindowAlternateExePath">
+            <summary>
+            Launch '%USERPROFILE%\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.exe'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UIIpBoxEditText">
+            <summary>
+            Type 'localhost' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UIIpBoxEditSendKeys">
+            <summary>
+            Type '{Tab}' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UINameBoxEditText">
+            <summary>
+            Type 'Brandon' in 'nameBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UIWordBoxEditText">
+            <summary>
+            Type 'joe' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerEnqueuedAndDequeuedParams.UIWordBoxEditSendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="T:BoggleClientTest.PlayerGameParams">
+            <summary>
+            Parameters to be passed into 'PlayerGame'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIBoggleViewWindowExePath">
+            <summary>
+            Launch '%USERPROFILE%\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.exe'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIBoggleViewWindowAlternateExePath">
+            <summary>
+            Launch '%USERPROFILE%\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.exe'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIIpBoxEditText">
+            <summary>
+            Type 'localhost' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIIpBoxEditSendKeys">
+            <summary>
+            Type '{Tab}' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UINameBoxEditText">
+            <summary>
+            Type 'Dalton' in 'nameBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text">
+            <summary>
+            Type 'eat' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text1">
+            <summary>
+            Type 'ate' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys1">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text2">
+            <summary>
+            Type 'hate' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys2">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text3">
+            <summary>
+            Type 'had' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys3">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text4">
+            <summary>
+            Type 'hard' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys4">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text5">
+            <summary>
+            Type 'hare' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys5">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text6">
+            <summary>
+            Type 'adsf' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys6">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text7">
+            <summary>
+            Type 'falke' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys7">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text8">
+            <summary>
+            Type 'hate' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys8">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text9">
+            <summary>
+            Type 'had' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys9">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text10">
+            <summary>
+            Type 'dad' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys10">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text11">
+            <summary>
+            Type 'date' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys11">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text12">
+            <summary>
+            Type 'dates' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys12">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text13">
+            <summary>
+            Type 'meh' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys13">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text14">
+            <summary>
+            Type 'rad' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys14">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text15">
+            <summary>
+            Type 'rade' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys15">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text16">
+            <summary>
+            Type 'rate' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys16">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text17">
+            <summary>
+            Type 'tear' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys17">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text18">
+            <summary>
+            Type 'tead' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys18">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text19">
+            <summary>
+            Type 'read' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys19">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text20">
+            <summary>
+            Type 'head' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys20">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text21">
+            <summary>
+            Type 'hard' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys21">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1Text22">
+            <summary>
+            Type 'hate' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.PlayerGameParams.UIWordBoxEdit1SendKeys22">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="T:BoggleClientTest.SampleGameParams">
+            <summary>
+            Parameters to be passed into 'SampleGame'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIBoggleViewWindowExePath">
+            <summary>
+            Launch '%USERPROFILE%\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.exe'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIBoggleViewWindowAlternateExePath">
+            <summary>
+            Launch '%USERPROFILE%\Desktop\School\CS 3500\Assignments\PS9\BoggleClient\bin\Debug\BoggleClient.exe'
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIIpBoxEditText">
+            <summary>
+            Type 'localhost' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIIpBoxEditSendKeys">
+            <summary>
+            Type '{Tab}' in 'ipBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UINameBoxEditText">
+            <summary>
+            Type 'Skywalker' in 'nameBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit2Text">
+            <summary>
+            Type 'tom' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit3SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit4Text">
+            <summary>
+            Type 'toe' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit5SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit6Text">
+            <summary>
+            Type 'log' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit7SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit8Text">
+            <summary>
+            Type 'tale' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit9SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit10Text">
+            <summary>
+            Type 'lot' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit11SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit12Text">
+            <summary>
+            Type 'yet' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit13SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit14Text">
+            <summary>
+            Type 'got' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit15SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit16Text">
+            <summary>
+            Type 'mot' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit17SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit18Text">
+            <summary>
+            Type 'tom' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit19SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit20Text">
+            <summary>
+            Type 'toaz' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit21SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit22Text">
+            <summary>
+            Type 'code' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UIWordBoxEdit23SendKeys">
+            <summary>
+            Type '{Enter}' in 'wordBox' text box
+            </summary>
+        </member>
+        <member name="F:BoggleClientTest.SampleGameParams.UITelnetlocalhostClientSendKeys">
+            <summary>
+            Type '{Enter}' in 'Telnet localhost' client
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.TestModel">
+            <summary>
+            Tests the entire model class.
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.TestIllegalScoreKeeping">
+            <summary>
+            Test to ensure that scoring an illegal word one time works correctly
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.TestABetterWay">
+            <summary>
+            Tests the IGNORE Before a game begins as well as testing the regular progression of a game
+            ending with the summary
+            </summary>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test1Class.StartReceived(System.String[])">
+            <summary>
+            Changes the status label for starting the game.
+            </summary>
+            <param name="startInfo"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test1Class.TimeReceived(System.String)">
+            <summary>
+            Updates the time label during the game
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test1Class.ScoreReceived(System.String[])">
+            <summary>
+            Updates the score during the game
+            </summary>
+            <param name="scores"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test1Class.StopReceived(System.String[])">
+            <summary>
+            Presents the game summary to the user
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test1Class.IgnoreReceived(System.String)">
+            <summary>
+            Notify the user that we are ignoring the submission
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test1Class.TerminateReceived(System.String)">
+            <summary>
+            Notify the user that the game has ended prematurely
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test7Class.StartReceived(System.String[])">
+            <summary>
+            Changes the status label for starting the game.
+            </summary>
+            <param name="startInfo"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test7Class.TimeReceived(System.String)">
+            <summary>
+            Updates the time label during the game
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test7Class.ScoreReceived(System.String[])">
+            <summary>
+            Updates the score during the game
+            </summary>
+            <param name="scores"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test7Class.StopReceived(System.String[])">
+            <summary>
+            Presents the game summary to the user
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test7Class.IgnoreReceived(System.String)">
+            <summary>
+            Notify the user that we are ignoring the submission
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test7Class.TerminateReceived(System.String)">
+            <summary>
+            Notify the user that the game has ended prematurely
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test8Class.StartReceived(System.String[])">
+            <summary>
+            Changes the status label for starting the game.
+            </summary>
+            <param name="startInfo"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test8Class.TimeReceived(System.String)">
+            <summary>
+            Updates the time label during the game
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test8Class.ScoreReceived(System.String[])">
+            <summary>
+            Updates the score during the game
+            </summary>
+            <param name="scores"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test8Class.StopReceived(System.String[])">
+            <summary>
+            Presents the game summary to the user
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test8Class.IgnoreReceived(System.String)">
+            <summary>
+            Notify the user that we are ignoring the submission
+            </summary>
+            <param name="text"></param>
+        </member>
+        <member name="M:BoggleClientTest.UnitTest1.Test8Class.TerminateReceived(System.String)">
+            <summary>
+            Notify the user that the game has ended prematurely
+            </summary>
+            <param name="text"></param>
+        </member>
+    </members>
+</doc>
