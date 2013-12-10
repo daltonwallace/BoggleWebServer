@@ -13,7 +13,7 @@ using System.Timers;
 namespace BB
 {
     /// <summary>
-    /// New comment for PS9
+    /// 
     /// </summary>
     public class BoggleServer
     {
@@ -178,14 +178,14 @@ namespace BB
                     playerQueue.Enqueue(tempPlayer);
 
                     // Special callback if the player queue is of size 1
-                    //if (playerQueue.Count == 1)
-                    //{
-                    //    // Set waiting player
-                    //    waitingPlayer = tempPlayer;
+                    if (playerQueue.Count == 1)
+                    {
+                        // Set waiting player
+                        waitingPlayer = tempPlayer;
 
-                    //    // BeginReceive with special callback
-                    //    currentSS.BeginReceive(waitingPlayerMessageReceived, waitingPlayer);
-                    //}
+                        // BeginReceive with special callback
+                        currentSS.BeginReceive(waitingPlayerMessageReceived, waitingPlayer);
+                    }
                 }
             }
             // If we didn't receive a play command then keep listening for additional commands
