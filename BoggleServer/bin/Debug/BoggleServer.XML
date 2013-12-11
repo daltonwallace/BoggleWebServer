@@ -6,7 +6,7 @@
     <members>
         <member name="T:BB.BoggleServer">
             <summary>
-            New comment for PS9
+            
             </summary>
         </member>
         <member name="M:BB.BoggleServer.Main(System.String[])">
@@ -20,6 +20,23 @@
             <summary>
             Constructor that creates a BoggleServer that listens for connection requests on port 2000
             </summary>
+        </member>
+        <member name="M:BB.BoggleServer.WebConnectionRequested(System.IAsyncResult)">
+            <summary>
+            This method is called when webServer.BeginAcceptSocket receives an incoming connection
+            to the server
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:BB.BoggleServer.WebRequestRetreived(System.String,System.Exception,System.Object)">
+            <summary>
+            This method should enqueue a player in our player pool if they have
+            requested to play with a player name and place them on a new thread
+            with a game if there exists a second player on the queue.
+            </summary>
+            <param name="s"></param>
+            <param name="e"></param>
+            <param name="payload"></param>
         </member>
         <member name="M:BB.BoggleServer.ConnectionRequested(System.IAsyncResult)">
             <summary>
@@ -72,6 +89,14 @@
             <param name="player1"></param>
             <param name="player2"></param>
         </member>
+        <member name="M:BB.BoggleServer.Game.gameMessageReceived(System.String,System.Exception,System.Object)">
+            <summary>
+            Handles all messages received during the game
+            </summary>
+            <param name="s"></param>
+            <param name="e"></param>
+            <param name="payload"></param>
+        </member>
         <member name="M:BB.BoggleServer.Game.AddScore(System.String)">
             <summary>
             Returns a positive value for a legal word.
@@ -107,6 +132,11 @@
             <param name="sendPlayer"></param>
             <param name="collectionPlayer"></param>
             <param name="collection"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.populateDatabase">
+            <summary>
+            Populate database for both players.  Utilize after the game has ended.
+            </summary>
         </member>
         <member name="T:BB.BoggleServer.Player">
             <summary>

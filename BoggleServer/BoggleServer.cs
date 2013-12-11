@@ -9,6 +9,7 @@ using BB;
 using CustomNetworking;
 using System.Threading;
 using System.Timers;
+using MySql.Data.MySqlClient;
 
 namespace BB
 {
@@ -21,6 +22,7 @@ namespace BB
 
         // Listens for incoming connectoin requests
         private TcpListener boggleServer;
+        private TcpListener webServer;
 
         // Encoding used for incoming/outgoing data
         private static System.Text.UTF8Encoding encoding = new System.Text.UTF8Encoding();
@@ -38,6 +40,9 @@ namespace BB
         private bool gameStarted;
         Player waitingPlayer;
 
+        // Database access
+        private const string connectionString = "server=atr.eng.utah.edu;database=bkoch;uid=bkoch;password=510368829";
+
         #endregion
 
         #region Pre-Game Warmup
@@ -49,7 +54,7 @@ namespace BB
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //args = new String[] { "120", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
+            args = new String[] { "45", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
 
             // Check to see that the appropriate number of arguments has been passed
             // to the server via the string[] args
@@ -121,14 +126,123 @@ namespace BB
 
             // A TcpListener listening for any incoming connections
             boggleServer = new TcpListener(IPAddress.Any, 2000);
-
             // Start the TcpListener
             boggleServer.Start();
+
+            // A TcpListener listening for any incoming connections
+            webServer = new TcpListener(IPAddress.Any, 2500);
+            // Start the TcpListener
+            webServer.Start();
 
             // Ask our new boggle server to call a specific method once a connection arrives
             // the waiting and calling will happen on another thread.  This call will return immediately
             // and the constructor will return to main
             boggleServer.BeginAcceptSocket(ConnectionRequested, null);
+
+            // Ask our new boggle server to call a specific method once a connection arrives
+            // the waiting and calling will happen on another thread.  This call will return immediately
+            // and the constructor will return to main
+            webServer.BeginAcceptSocket(WebConnectionRequested, null);
+        }
+
+        /// <summary>
+        /// This method is called when webServer.BeginAcceptSocket receives an incoming connection
+        /// to the server
+        /// </summary>
+        /// <param name="result"></param>
+        public void WebConnectionRequested(IAsyncResult result)
+        {
+            // Obtain the socket corresponding to the incoming request.
+            Socket s = webServer.EndAcceptSocket(result);
+
+            // Should probably use a StringSocket here...
+            StringSocket ss = new StringSocket(s, encoding);
+
+            // Start listening to that player
+            ss.BeginReceive(WebRequestRetreived, ss);
+
+            // Start listening for more incoming connections
+            webServer.BeginAcceptSocket(WebConnectionRequested, null);
+        }
+
+        /// <summary>
+        /// This method should enqueue a player in our player pool if they have
+        /// requested to play with a player name and place them on a new thread
+        /// with a game if there exists a second player on the queue.
+        /// </summary>
+        /// <param name="s"></param>
+        /// <param name="e"></param>
+        /// <param name="payload"></param>
+        private void WebRequestRetreived(string s, Exception e, object payload)
+        {
+            if (s == null || s == "GET /favicon.ico HTTP/1.1\r")
+            {
+                return;
+            }
+
+            // Cast string socket
+            StringSocket webSocket = (StringSocket)payload;
+
+            String pageHeader = "HTTP/1.1 200 OK \r\n Connection: close \r\n Content-Type: text/html; charset=UTF-8\r\n";
+
+            // Send the page header
+            webSocket.BeginSend(pageHeader, (exc1, o) => { }, webSocket);
+
+            // Send a blank line consisting only of "\r\n"
+            webSocket.BeginSend("\r\n", (exc1, o) => { }, webSocket);
+
+            // Remove the \r from the string
+            s = s.Trim();
+
+            // We get a favicon.ico request as well...
+            // Determine GET request
+            // Return appropriate HTML with data from database
+            using (MySqlConnection conn = new MySqlConnection(connectionString))
+            {
+                try
+                {
+                    if (s == "GET /players HTTP/1.1")
+                    {
+                        // The server should send back an HTML page containing a table of information.  There should
+                        // be one row for each player in the database and four columns.  Each row should consist of 
+                        // the player's name, the number of games won by the player, the number of games lost by the
+                        // player, and the number of games tied by the player.
+
+                        webSocket.BeginSend("<h1>Test 1 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+
+                    }
+                    else if (s.StartsWith("GET /games?player=") && s.EndsWith("HTTP/1.1"))
+                    {
+                        // The server should send back an HTML page containing a table of information.  There should
+                        // be one row for each game played by the player named in the line of text and six columns.
+                        // Each row should consist of a number that uniquely identifies the game, the date and time
+                        // when the game was played, the name of the opponent, the score for the named player, and
+                        // the named player, and the score for the opponent.
+
+                        webSocket.BeginSend("<h1>Test 2 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                    }
+
+                    else if (s.StartsWith("GET /game?id=") && s.EndsWith("HTTP/1.1"))
+                    {
+                        // The server should send back an HTML page containing information about the specified game 
+                        // The page should contain the names and scores of the two players involved, the date and
+                        // and time when the game was played, a 4x4 table containing the Boggle board that was used,
+                        // the time limit that was used for the game, and the five-part word summary.
+
+                        webSocket.BeginSend("<h1>Test 3 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                    }
+                    // Any other message
+                    else
+                    {
+                        // Send back an HTML page containing an error message
+
+                        webSocket.BeginSend("<h1>Test 4 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                    }
+                }
+                catch(Exception exc)
+                {
+                }
+            }
         }
 
         /// <summary>
@@ -319,6 +433,12 @@ namespace BB
 
             }
 
+            /// <summary>
+            /// Handles all messages received during the game
+            /// </summary>
+            /// <param name="s"></param>
+            /// <param name="e"></param>
+            /// <param name="payload"></param>
             public void gameMessageReceived(string s, Exception e, object payload)
             {
 
@@ -496,6 +616,9 @@ namespace BB
                     // Send the players their final scores and then print the summaries
                     playerOneSummary();
                     playerTwoSummary();
+
+                    // Populate the database with all of the totally rad statistics. WORD.
+                    populateDatabase();
                 }
             }
 
@@ -507,7 +630,7 @@ namespace BB
                 gameOver = true;
 
                 // Prints the stats for player One and when it has completed proceeds to 
-                playerOne.StringSocket.BeginSend("STOP " + printStats(playerOne, playerOne, playerOne.LegalWords) + printStats(playerOne, playerTwo, playerTwo.LegalWords) + printStats(playerOne, playerOne, playerOne.DuplicateWords) + printStats(playerOne, playerOne, playerOne.IllegalWords) + printStats(playerOne, playerTwo,playerTwo.IllegalWords) + "\n", (exc, o) => { }, 2);
+                playerOne.StringSocket.BeginSend("STOP " + printStats(playerOne, playerOne, playerOne.LegalWords) + printStats(playerOne, playerTwo, playerTwo.LegalWords) + printStats(playerOne, playerOne, playerOne.DuplicateWords) + printStats(playerOne, playerOne, playerOne.IllegalWords) + printStats(playerOne, playerTwo, playerTwo.IllegalWords) + "\n", (exc, o) => { }, 2);
             }
 
             /// <summary>
@@ -515,7 +638,7 @@ namespace BB
             /// </summary>
             private void playerTwoSummary()
             {
-                playerTwo.StringSocket.BeginSend("STOP " + printStats(playerTwo, playerTwo, playerTwo.LegalWords) + printStats(playerTwo, playerOne,            playerOne.LegalWords) +printStats(playerTwo, playerTwo, playerTwo.DuplicateWords) + printStats(playerTwo, playerTwo, playerTwo.IllegalWords) + printStats(playerTwo, playerOne,playerOne.IllegalWords) + "\n", (exc, o) => { playerTwo.StringSocket.Close(); }, 2);
+                playerTwo.StringSocket.BeginSend("STOP " + printStats(playerTwo, playerTwo, playerTwo.LegalWords) + printStats(playerTwo, playerOne, playerOne.LegalWords) + printStats(playerTwo, playerTwo, playerTwo.DuplicateWords) + printStats(playerTwo, playerTwo, playerTwo.IllegalWords) + printStats(playerTwo, playerOne, playerOne.IllegalWords) + "\n", (exc, o) => { playerTwo.StringSocket.Close(); }, 2);
             }
 
             /// <summary>
@@ -536,6 +659,178 @@ namespace BB
                 }
 
                 return temp.ToString();
+            }
+
+            /// <summary>
+            /// Populate database for both players.  Utilize after the game has ended.
+            /// </summary>
+            private void populateDatabase()
+            {
+                // Connect to the DB
+                using (MySqlConnection conn = new MySqlConnection(connectionString))
+                {
+                    try
+                    {
+                        // Check for the player name in the player database
+                        MySqlDataReader reader;
+                        bool playerOneExists = false;
+                        bool playerTwoExists = false;
+                        int playerOneID = 0;
+                        int playerTwoID = 0;
+                       int gameID = 0;
+
+                        #region Add Players 
+
+                        conn.Open();
+                        MySqlCommand cmd = conn.CreateCommand();
+                        cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerOne.Name + "'";
+                        using (reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // We now know the player exists in the table
+                                // We do not need to add them
+                                playerOneExists = true;
+                                playerOneID = (int)reader["PlayerID"];
+                            }
+                        }
+
+                        cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerTwo.Name + "'";
+                        using (reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // We now know the player exists in the table
+                                // We do not need to add them
+                                playerTwoExists = true;
+                                playerTwoID = (int)reader["PlayerID"];
+                            }
+                        }
+
+                        // If they do not exist in the database, add them
+                        if (!playerOneExists)
+                        {
+                            // Add playerOne to database and get his/her playerID
+                            cmd.CommandText = "INSERT Player (PlayerName) VALUES ('" + playerOne.Name + "')";
+                            cmd.ExecuteNonQuery();
+
+
+                            cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerOne.Name + "'";
+                            using (reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    // Grab the player's ID
+                                    playerOneID = (int)reader["PlayerID"];
+                                }
+                            }
+
+                        }
+
+                        if (!playerTwoExists)
+                        {
+                            // Add playerTwo to database and get his/her playerID
+                            cmd.CommandText = "INSERT Player (PlayerName) VALUES ('" + playerTwo.Name + "')";
+                            cmd.ExecuteNonQuery();
+
+
+                            cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerTwo.Name + "'";
+                            using (reader = cmd.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    // Grab the player's ID
+                                    playerTwoID = (int)reader["PlayerID"];
+                                }
+                            }
+                        }
+
+                        #endregion
+
+                        #region Add Game
+
+                        DateTime currentTime = DateTime.Now;
+
+                        // Now, add a new game to the game table
+                        cmd.CommandText = "INSERT Game (Player1ID, Player2ID, GameDate, Board, TimeLimit, Player1Score, Player2Score) VALUES (" + playerOneID + ", " + playerTwoID + ", '" + currentTime + "', " + "'" + this.b.ToString() +"', " + this.gameTime + ", " + this.playerOne.Score +", " + this.playerTwo.Score + ")";
+                        cmd.ExecuteNonQuery();
+
+                        // Now get the game ID
+                        cmd.CommandText = "select GameID from Game where Game.GameDate = '" + currentTime + "'";
+                        using (reader = cmd.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                // Grab the player's ID
+                                gameID = (int)reader["GameID"];
+                            }
+                        }
+
+                        #endregion
+
+                        #region Add Words
+
+                        // Populate the Words table
+                        foreach(String word in this.playerOne.LegalWords)
+                        {
+                            // Now, add all words to the words table
+                            // Create a command
+                            cmd.CommandText = "INSERT Words (Word, GameID, PlayerID, Type) VALUES ('" + word + "', " + gameID + ", " + playerOneID + ", " + "'Legal')";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        foreach (String word in this.playerOne.IllegalWords)
+                        {
+                            // Now, add all words to the words table
+                            // Create a command
+                            cmd.CommandText = "INSERT Words (Word, GameID, PlayerID, Type) VALUES ('" + word + "', " + gameID + ", " + playerOneID + ", " + "'Illegal')";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        foreach (String word in this.playerOne.DuplicateWords)
+                        {
+                            // Now, add all words to the words table
+                            // Create a command
+                            cmd.CommandText = "INSERT Words (Word, GameID, PlayerID, Type) VALUES ('" + word + "', " + gameID + ", " + playerOneID + ", " + "'Duplicate')";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        // Player two additions
+
+                        foreach (String word in this.playerTwo.DuplicateWords)
+                        {
+                            // Now, add all words to the words table
+                            // Create a command
+                            cmd.CommandText = "INSERT Words (Word, GameID, PlayerID, Type) VALUES ('" + word + "', " + gameID + ", " + playerTwoID + ", " + "'Duplicate')";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        foreach (String word in this.playerTwo.LegalWords)
+                        {
+                            // Now, add all words to the words table
+                            // Create a command
+                            cmd.CommandText = "INSERT Words (Word, GameID, PlayerID, Type) VALUES ('" + word + "', " + gameID + ", " + playerTwoID + ", " + "'Legal')";
+                            cmd.ExecuteNonQuery();
+                        }
+
+
+                        foreach (String word in this.playerTwo.IllegalWords)
+                        {
+                            // Now, add all words to the words table
+                            // Create a command
+                            cmd.CommandText = "INSERT Words (Word, GameID, PlayerID, Type) VALUES ('" + word + "', " + gameID + ", " + playerTwoID + ", " + "'Illegal')";
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        #endregion
+
+                        conn.Close();
+
+                    }
+                    catch (Exception e)
+                    {
+                    }
+                }
             }
 
             #endregion

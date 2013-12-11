@@ -217,6 +217,10 @@ namespace BoggleClient
 
             // Hide the start button
             startButton.Invoke(new Action(() => { startButton.Visible = true; }));
+
+            // Reset scores to 0           
+            playerScoreBox.Invoke(new Action(() => { playerScoreBox.Text = "0"; }));
+            opponentScoreBox.Invoke(new Action(() => { opponentScoreBox.Text = "0"; }));
         }
 
         /// <summary>

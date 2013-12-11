@@ -67,3 +67,4 @@ C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS10\BoggleClient\obj\Debug\B
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS10\BoggleClient\obj\Debug\BoggleClient.BoggleClientController.resources
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS10\BoggleClient\obj\Debug\BoggleClient.Properties.Resources.resources
 C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS10\BoggleClient\obj\Debug\BoggleClient.csproj.GenerateResource.Cache
+C:\Users\Dalton\Desktop\School\CS 3500\Assignments\PS10\BoggleClient\bin\Debug\MySql.Data.dll

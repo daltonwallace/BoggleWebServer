@@ -6,7 +6,7 @@
     <members>
         <member name="T:BB.BoggleServer">
             <summary>
-            New comment for PS9
+            
             </summary>
         </member>
         <member name="M:BB.BoggleServer.Main(System.String[])">
@@ -20,6 +20,23 @@
             <summary>
             Constructor that creates a BoggleServer that listens for connection requests on port 2000
             </summary>
+        </member>
+        <member name="M:BB.BoggleServer.WebConnectionRequested(System.IAsyncResult)">
+            <summary>
+            This method is called when webServer.BeginAcceptSocket receives an incoming connection
+            to the server
+            </summary>
+            <param name="result"></param>
+        </member>
+        <member name="M:BB.BoggleServer.WebRequestRetreived(System.String,System.Exception,System.Object)">
+            <summary>
+            This method should enqueue a player in our player pool if they have
+            requested to play with a player name and place them on a new thread
+            with a game if there exists a second player on the queue.
+            </summary>
+            <param name="s"></param>
+            <param name="e"></param>
+            <param name="payload"></param>
         </member>
         <member name="M:BB.BoggleServer.ConnectionRequested(System.IAsyncResult)">
             <summary>
@@ -89,6 +106,11 @@
             Timer invoked method every 1000 milliseconds
             </summary>
             <param name="state"></param>
+        </member>
+        <member name="M:BB.BoggleServer.Game.populateDatabase">
+            <summary>
+            Populate database for both players.  Utilize after the game has ended.
+            </summary>
         </member>
         <member name="M:BB.BoggleServer.Game.playerOneSummary">
             <summary>
