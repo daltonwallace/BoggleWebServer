@@ -4,6 +4,11 @@
         <name>BoggleClient</name>
     </assembly>
     <members>
+        <member name="T:BoggleClient.BoggleClientController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:BoggleClient.BoggleClientController.#ctor">
             <summary>
             Creates a new model and registers various line events
@@ -30,12 +35,13 @@
             <param name="sender"></param>
             <param name="e"></param>
         </member>
-        <member name="M:BoggleClient.BoggleClientController.BoggleClientController_KeyDown(System.Object,System.Windows.Forms.KeyEventArgs)">
+        <member name="M:BoggleClient.BoggleClientController.ProcessCmdKey(System.Windows.Forms.Message@,System.Windows.Forms.Keys)">
             <summary>
-            If the player hit enter, then the word in the wordBox will be sent to the server
+            We use this method to handle Enter key presses
             </summary>
-            <param name="sender"></param>
-            <param name="e"></param>
+            <param name="msg"></param>
+            <param name="keyData"></param>
+            <returns></returns>
         </member>
         <member name="M:BoggleClient.BoggleClientController.BoggleClientController_FormClosing(System.Object,System.Windows.Forms.FormClosingEventArgs)">
             <summary>
@@ -91,6 +97,11 @@
             Presents the game summary to the user
             </summary>
             <param name="text"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.ResetBoard">
+            <summary>
+            Returns the board to a pre game state
+            </summary>
         </member>
         <member name="F:BoggleClient.BoggleClientController.components">
             <summary>

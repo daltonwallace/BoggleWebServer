@@ -4,6 +4,11 @@
         <name>BoggleClient</name>
     </assembly>
     <members>
+        <member name="T:BoggleClient.BoggleClientController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:BoggleClient.BoggleClientController.#ctor">
             <summary>
             Creates a new model and registers various line events
@@ -91,6 +96,11 @@
             Presents the game summary to the user
             </summary>
             <param name="text"></param>
+        </member>
+        <member name="M:BoggleClient.BoggleClientController.ResetBoard">
+            <summary>
+            Returns the board to a pre game state
+            </summary>
         </member>
         <member name="F:BoggleClient.BoggleClientController.components">
             <summary>

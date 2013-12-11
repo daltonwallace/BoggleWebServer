@@ -11,6 +11,9 @@ using BoggleClientModel;
 
 namespace BoggleClient
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class BoggleClientController : Form
     {
         #region Globals and Constructor
@@ -69,13 +72,8 @@ namespace BoggleClient
             // Handle the leave early
             model.Disconnect();
 
-            // Show the start Button
-            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
-
-            // Change the status to disconnected
-            statusBox.Invoke(new Action(() => { statusBox.Text = "Disconnected"; statusBox.BackColor = Color.White; }));
-
-            wordBox.Invoke(new Action(() => { wordBox.Enabled = false; }));
+            // Reset the board
+            ResetBoard();
         }
 
         /// <summary>
@@ -90,19 +88,25 @@ namespace BoggleClient
         }
 
         /// <summary>
-        /// If the player hit enter, then the word in the wordBox will be sent to the server
+        /// We use this method to handle Enter key presses
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void BoggleClientController_KeyDown(object sender, KeyEventArgs e)
+        /// <param name="msg"></param>
+        /// <param name="keyData"></param>
+        /// <returns></returns>
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (e.KeyCode == Keys.Enter)
+            switch (keyData)
             {
-                e.Handled = true;
+                case Keys.Enter:
+                    {
+                        // Attempt to send the word
+                        sendWord(wordBox.Text);
 
-                // Attempt to send the word
-                sendWord(wordBox.Text);  
+                        return true;
+                    }                 
             }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
 
         /// <summary>
@@ -208,19 +212,11 @@ namespace BoggleClient
         /// <param name="text"></param>
         private void StopReceived(string[] summaryInfo)
         {
-            statusBox.Invoke(new Action(() => { statusBox.BackColor = Color.White; }));
-
-            wordBox.Invoke(new Action(() => { wordBox.Enabled = false; }));
+            // Reset the board
+            ResetBoard();
 
             // Display the summary to the user after the game has ended
             MessageBox.Show(SummaryMessage(summaryInfo));
-
-            // Hide the start button
-            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
-
-            // Reset scores to 0           
-            playerScoreBox.Invoke(new Action(() => { playerScoreBox.Text = "0"; }));
-            opponentScoreBox.Invoke(new Action(() => { opponentScoreBox.Text = "0"; }));
         }
 
         /// <summary>
@@ -242,8 +238,8 @@ namespace BoggleClient
             // Display Pop Up 
             MessageBox.Show("Your opponent has left the game");
 
-            // Show the start Button
-            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
+            // Reset the board
+            ResetBoard();
         }
 
         #endregion
@@ -400,6 +396,25 @@ namespace BoggleClient
             #endregion
 
             return message;
+        }
+
+        /// <summary>
+        /// Returns the board to a pre game state
+        /// </summary>
+        public void ResetBoard()
+        {
+            // Update the status
+            statusBox.Invoke(new Action(() => { statusBox.Text = "Not Connected"; }));
+
+            // Disable the word box
+            wordBox.Invoke(new Action(() => { wordBox.Enabled = false; wordBox.Text = ""; }));
+
+            // Hide the start button
+            startButton.Invoke(new Action(() => { startButton.Visible = true; }));
+
+            // Reset scores to 0           
+            playerScoreBox.Invoke(new Action(() => { playerScoreBox.Text = "0"; }));
+            opponentScoreBox.Invoke(new Action(() => { opponentScoreBox.Text = "0"; }));
         }
 
         #endregion   

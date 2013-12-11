@@ -354,9 +354,13 @@ namespace BB
                     {
                         playerQueue.Dequeue();
                         Console.WriteLine("Player dequeud");
-                    }                  
+                    }
                 }
                 return;
+            }
+            else
+            {
+                waitingPlayer.Game.gameMessageReceived(s, e, payload);
             }
         }
 
