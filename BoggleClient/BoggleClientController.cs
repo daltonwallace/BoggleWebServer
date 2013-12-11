@@ -235,11 +235,12 @@ namespace BoggleClient
         /// <param name="text"></param>
         private void TerminateReceived(string ignoring)
         {
-            // Display Pop Up 
-            MessageBox.Show("Your opponent has left the game");
 
             // Reset the board
             ResetBoard();
+
+            // Display Pop Up 
+            MessageBox.Show("Your opponent has left the game");
         }
 
         #endregion
