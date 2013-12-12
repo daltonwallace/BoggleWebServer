@@ -10,6 +10,7 @@ using CustomNetworking;
 using System.Threading;
 using System.Timers;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace BB
 {
@@ -54,7 +55,7 @@ namespace BB
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            //args = new String[] { "45", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
+            args = new String[] { "45", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
 
             // Check to see that the appropriate number of arguments has been passed
             // to the server via the string[] args
@@ -201,6 +202,10 @@ namespace BB
             {
                 try
                 {
+                    StringBuilder html = new StringBuilder();
+
+                    #region Player Stats Html
+
                     if (s == "GET /players HTTP/1.1")
                     {
                         // The server should send back an HTML page containing a table of information.  There should
@@ -208,9 +213,54 @@ namespace BB
                         // the player's name, the number of games won by the player, the number of games lost by the
                         // player, and the number of games tied by the player.
 
-                        webSocket.BeginSend("<h1>Test 1 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                        //webSocket.BeginSend("<h1>Test 1 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
 
+                        try
+                        {
+                            conn.Open();
+
+                            string stm = "SELECT Player.PlayerName, Player.Wins, Player.Losses, Player.Ties FROM Player";
+                            MySqlDataAdapter da = new MySqlDataAdapter(stm, conn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "PlayerStats");
+                            DataTable dt = ds.Tables["PlayerStats"];
+
+                            dt.WriteXml("PlayerStats.xml");
+
+                            html.Append("<table border = '1'>");
+
+                            html.Append("<tr> <td>Player Name</td> <td>Wins</td> <td>Losses</td> <td>Ties</td> </tr>");
+
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                html.Append("<tr>");
+
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+
+                                html.Append("</tr>");
+                            }
+
+                            html.Append("</table>");
+
+                            webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
+
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error Homie!");
+
+                        }
                     }
+
+                    #endregion
+
+                    #region Game Stats By Player Html
+
                     else if (s.StartsWith("GET /games?player=") && s.EndsWith("HTTP/1.1"))
                     {
                         // The server should send back an HTML page containing a table of information.  There should
@@ -219,8 +269,96 @@ namespace BB
                         // when the game was played, the name of the opponent, the score for the named player, and
                         // the named player, and the score for the opponent.
 
-                        webSocket.BeginSend("<h1>Test 2 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                        // Get the name of the requested player
+                        String[] name = s.Substring(18).Split(' ');
+
+                        #region Requested Player is Player One in Database
+                        try
+                        {
+                            conn.Open();
+
+                            // Build the query
+                            string stm = "SELECT Game.GameID, Game.GameDate, Game.Player1Name, Game.Player1Score, Game.Player2Name, Game.Player2Score FROM Game WHERE (Game.Player1Name = '" + name[0] + "')";
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(stm, conn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "GameStats");
+                            DataTable dt = ds.Tables["GameStats"];
+
+                            dt.WriteXml("GameStats.xml");
+
+                            // Build an HTML table with the following column headers:
+                            html.Append("<table border = '1'>");
+
+                            html.Append("<tr> <td>Game ID</td> <td>Date</td> <td>Player Name</td> <td>Player Score</td> <td>Opponent Name</td> <td>Opponent Score</td> </tr>");
+
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                html.Append("<tr>");
+
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+
+                                html.Append("</tr>");
+                            }
+
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error Homie!");
+
+                        }
+                        #endregion
+
+                        #region Requested Player is Player Two in Database
+                        try
+                        {
+                            // Requery the database with the requested player as player two.
+                            string stm = "SELECT Game.GameID, Game.GameDate, Game.Player2Name, Game.Player2Score, Game.Player1Name, Game.Player1Score FROM Game WHERE (Game.Player2Name = '" + name[0] + "')";
+                            MySqlDataAdapter da = new MySqlDataAdapter(stm, conn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "PlayerStats");
+                            DataTable dt = ds.Tables["PlayerStats"];
+
+                            dt.WriteXml("PlayerStats.xml");
+
+                            // Add all stats to the previously built html table
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                html.Append("<tr>");
+
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+
+                                html.Append("</tr>");
+                            }
+
+                            // Close the table
+                            html.Append("</table>");
+
+                            // Send the web page
+                            webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
+
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error Homie!");
+
+                        }
+                        #endregion
                     }
+
+                    #endregion
+
+                    #region Game Stats By Game ID Html
 
                     else if (s.StartsWith("GET /game?id=") && s.EndsWith("HTTP/1.1"))
                     {
@@ -229,8 +367,128 @@ namespace BB
                         // and time when the game was played, a 4x4 table containing the Boggle board that was used,
                         // the time limit that was used for the game, and the five-part word summary.
 
-                        webSocket.BeginSend("<h1>Test 3 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                        string[] game = s.Substring(13).Split(' ');
+
+                        #region Create Boggle Board
+                        try
+                        {
+                            conn.Open();
+
+                            // Build the query
+                            string stm = "SELECT Game.Board FROM Game WHERE (Game.GameID = " + game[0] + ")";
+
+                            MySqlDataAdapter da = new MySqlDataAdapter(stm, conn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "GameStats");
+                            DataTable dt = ds.Tables["GameStats"];
+
+                            dt.WriteXml("GameStats.xml");
+
+                            // Build an HTML table with the following column headers:
+                            html.Append("<table border = '1'>");
+                            html.Append("<tr colspan = '4'> Boggle Board </tr>");
+
+                            string bb = "";
+
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    bb = (string)row[col];
+                                } 
+                            }
+
+                            html.Append("<tr>");
+                            int count = 0;
+
+                            foreach (char letter in bb)
+                            {
+                                if (count % 4 == 0)
+                                {
+                                    if (count != 15)
+                                        html.Append("</tr><tr>");
+                                    else
+                                        html.Append("</tr>");
+                                }
+
+                                html.Append("<td>" + letter + "</td>");
+
+                                count++;
+                            }
+
+                            html.Append("</br>");
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error Homie!");
+
+                        }
+                        #endregion
+
+                        #region Create Word Summary
+
+                        try
+                        {
+                            Player player1 = new Player();
+                            Player player2 = new Player();
+
+                            // Requery the database with the requested player as player two.
+                            string stm = "SELECT Player.PlayerName, Words.Word, Words.GameID, Words.Type FROM Words WHERE (Game.GameID = " + game[0] + ")";
+                            MySqlDataAdapter da = new MySqlDataAdapter(stm, conn);
+
+                            DataSet ds = new DataSet();
+
+                            da.Fill(ds, "WordStats");
+                            DataTable dt = ds.Tables["WordStats"];
+
+                            dt.WriteXml("WordStats.xml");
+
+                            bool firstTime = true;
+
+                            // Add all stats to the previously built html table
+                            foreach (DataRow row in dt.Rows)
+                            {
+
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    // Name the players
+                                    if(firstTime)
+                                    {
+                                        if(player1.Name == null)
+                                            player1.Name = (string)row[col];
+                                        else if(player1.Name != (string)row[col] && player2.Name != null)
+                                            player2.Name = (string)row[col];
+                                    }
+                                    else
+
+                                }
+
+                                firstTime = true;
+                            }
+
+                            // Close the table
+                            html.Append("</table>");
+
+                            // Send the web page
+                            webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
+
+                        }
+                        catch (MySqlException ex)
+                        {
+                            Console.WriteLine("Error Homie!");
+
+                        }
+                        #endregion
+
+                        webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
                     }
+
+                    #endregion
+
+                    #region Error Html
+
                     // Any other message
                     else
                     {
@@ -238,6 +496,8 @@ namespace BB
 
                         webSocket.BeginSend("<h1>Test 4 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
                     }
+
+                    #endregion
                 }
                 catch(Exception exc)
                 {
@@ -681,13 +941,28 @@ namespace BB
                         bool playerTwoExists = false;
                         int playerOneID = 0;
                         int playerTwoID = 0;
-                       int gameID = 0;
+                        int gameCount = 0;
+                        int gameID = 0;
+                        int win = -1;
 
                         #region Add Players 
 
-                        conn.Open();
-                        MySqlCommand cmd = conn.CreateCommand();
-                        cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerOne.Name + "'";
+                        #region Game Win determination
+                        // Determine who won the game
+                       if (playerOne.Score > playerTwo.Score) // Player One won
+                           win = 1;
+                       else if (playerTwo.Score > playerOne.Score) // Player Two won
+                           win = 2;
+                       else // Tie
+                           win = 0;
+
+                        #endregion
+
+                       conn.Open();
+                       MySqlCommand cmd = conn.CreateCommand();
+
+                        #region Player One Exists
+                        cmd.CommandText = "select PlayerID, PlayerName, Wins, Losses, Ties from Player where Player.PlayerName = '" + playerOne.Name + "'";
                         using (reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -696,10 +971,43 @@ namespace BB
                                 // We do not need to add them
                                 playerOneExists = true;
                                 playerOneID = (int)reader["PlayerID"];
+
+                                #region Add Player One's Win/Loss/Tie to Database
+                                // If player one won, insert their new win count into the database
+                                if (win == 1)
+                                {
+                                    gameCount = (int)reader["Wins"];
+                                    gameCount++;                                 
+                                    cmd.CommandText = "UPDATE Player SET Wins =" + gameCount + " WHERE Player.PlayerName = '" + playerOne.Name + "'";
+                                }
+
+                                // If player two won, insert player one's new loss count into the database
+                                else if (win == 2)
+                                {
+                                    gameCount = (int)reader["Losses"];
+                                    gameCount++;
+                                    cmd.CommandText = "UPDATE Player SET Losses =" + gameCount + " WHERE Player.PlayerName = '" + playerOne.Name + "'";
+                                }
+
+                                // If it was a tie, insert player one's new tie count into the database
+                                else
+                                {
+                                    gameCount = (int)reader["Ties"];
+                                    gameCount++;
+                                    cmd.CommandText = "UPDATE Player SET Ties =" + gameCount + " WHERE Player.PlayerName = '" + playerOne.Name + "'";
+                                }
+
+                                #endregion
                             }
                         }
 
-                        cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerTwo.Name + "'";
+                        cmd.ExecuteNonQuery();
+
+                        #endregion
+
+                        #region Player Two Exists
+
+                        cmd.CommandText = "select PlayerID, PlayerName, Wins, Losses, Ties from Player where Player.PlayerName = '" + playerTwo.Name + "'";
                         using (reader = cmd.ExecuteReader())
                         {
                             while (reader.Read())
@@ -708,18 +1016,61 @@ namespace BB
                                 // We do not need to add them
                                 playerTwoExists = true;
                                 playerTwoID = (int)reader["PlayerID"];
+
+                                #region Add Player Two's Win/Loss/Tie to Database
+                                // If player two won, insert their new win count into the database
+                                if (win == 2)
+                                {
+                                    gameCount = (int)reader["Wins"];
+                                    gameCount++;
+                                    cmd.CommandText = "UPDATE Player SET Wins =" + gameCount + " WHERE Player.PlayerName = '" + playerTwo.Name + "'";                   
+                                }
+
+                                // If player two won, insert player two's new loss count into the database
+                                else if (win == 1)
+                                {
+                                    gameCount = (int)reader["Losses"];
+                                    gameCount++;
+                                    cmd.CommandText = "UPDATE Player SET Losses =" + gameCount + " WHERE Player.PlayerName = '" + playerTwo.Name + "'";                                            
+                                }
+
+                                // If it was a tie, insert player two's new tie count into the database
+                                else
+                                {
+                                    gameCount = (int)reader["Ties"];
+                                    gameCount++;
+                                    cmd.CommandText = "UPDATE Player SET Ties =" + gameCount + " WHERE Player.PlayerName = '" + playerTwo.Name + "'";                   
+                                }
+
+                                #endregion
                             }
                         }
 
+                        cmd.ExecuteNonQuery();
+
+                        #endregion
+
+                        #region Player One DNE
                         // If they do not exist in the database, add them
                         if (!playerOneExists)
                         {
                             // Add playerOne to database and get his/her playerID
-                            cmd.CommandText = "INSERT Player (PlayerName) VALUES ('" + playerOne.Name + "')";
+                            //cmd.CommandText = "INSERT Player (PlayerName) VALUES ('" + playerOne.Name + "')";
+
+                            #region Insert player into the table with inital win/loss/tie
+                            if (win == 1)
+                                cmd.CommandText = "INSERT Player (PlayerName, Wins) VALUES ('" + playerOne.Name + "', " + 1 + ")";
+                            else if (win == 2)
+                                cmd.CommandText = "INSERT Player (PlayerName, Losses) VALUES ('" + playerOne.Name + "', " + 1 + ")";
+                            else
+                                cmd.CommandText = "INSERT Player (PlayerName, Ties) VALUES ('" + playerOne.Name + "', " + 1 + ")";
+                            
                             cmd.ExecuteNonQuery();
 
+                            #endregion
 
                             cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerOne.Name + "'";
+                            
                             using (reader = cmd.ExecuteReader())
                             {
                                 while (reader.Read())
@@ -731,12 +1082,24 @@ namespace BB
 
                         }
 
+                        #endregion
+
+                        #region Player Two DNE
                         if (!playerTwoExists)
                         {
                             // Add playerTwo to database and get his/her playerID
-                            cmd.CommandText = "INSERT Player (PlayerName) VALUES ('" + playerTwo.Name + "')";
-                            cmd.ExecuteNonQuery();
+                            //cmd.CommandText = "INSERT Player (PlayerName) VALUES ('" + playerTwo.Name + "')";
 
+                            #region Insert player into the table with inital win/loss/tie
+                            if (win == 2)
+                                cmd.CommandText = "INSERT Player (PlayerName, Wins) VALUES ('" + playerTwo.Name + "', " + 1 + ")";
+                            else if (win == 1)
+                                cmd.CommandText = "INSERT Player (PlayerName, Losses) VALUES ('" + playerTwo.Name + "', " + 1 + ")";
+                            else
+                                cmd.CommandText = "INSERT Player (PlayerName, Ties) VALUES ('" + playerTwo.Name + "', " + 1 + ")";
+
+                            cmd.ExecuteNonQuery();
+                            #endregion
 
                             cmd.CommandText = "select PlayerID, PlayerName from Player where Player.PlayerName = '" + playerTwo.Name + "'";
                             using (reader = cmd.ExecuteReader())
@@ -748,6 +1111,7 @@ namespace BB
                                 }
                             }
                         }
+                        #endregion
 
                         #endregion
 
@@ -756,7 +1120,7 @@ namespace BB
                         DateTime currentTime = DateTime.Now;
 
                         // Now, add a new game to the game table
-                        cmd.CommandText = "INSERT Game (Player1ID, Player2ID, GameDate, Board, TimeLimit, Player1Score, Player2Score) VALUES (" + playerOneID + ", " + playerTwoID + ", '" + currentTime + "', " + "'" + this.b.ToString() +"', " + this.gameTime + ", " + this.playerOne.Score +", " + this.playerTwo.Score + ")";
+                        cmd.CommandText = "INSERT Game (Player1ID, Player1Name, Player2ID, Player2Name, GameDate, Board, TimeLimit, Player1Score, Player2Score) VALUES (" + playerOneID + ", '" + playerOne.Name + "', " + playerTwoID + ", '" + playerTwo.Name + "', '" + currentTime + "', " + "'" + this.b.ToString() +"', " + this.gameTime + ", " + this.playerOne.Score +", " + this.playerTwo.Score + ")";
                         cmd.ExecuteNonQuery();
 
                         // Now get the game ID
@@ -871,6 +1235,18 @@ namespace BB
                 game = null;
             }
 
+            public Player()
+            {
+                // Initialize instance variables:
+                this.ss = null;
+                this.name = null;
+                this.legalWords = new HashSet<string>();
+                this.illegalWords = new HashSet<string>();
+                this.duplicateWords = new HashSet<string>();
+                this.score = 0;
+                game = null;
+            }
+
             /// <summary>
             /// Property which returns the payload identifier.
             /// </summary>
@@ -884,6 +1260,7 @@ namespace BB
             /// </summary>
             public string Name
             {
+                set { name = value; }
                 get { return name; }
             }
 

@@ -1,0 +1,27 @@
+<?xml version="1.0" standalone="yes"?>
+<NewDataSet>
+  <PlayerStats>
+    <GameID>1</GameID>
+    <GameDate>12/12/2013 1:07:56 PM</GameDate>
+    <Player2Name>Dalton</Player2Name>
+    <Player2Score>3</Player2Score>
+    <Player1Name>LukeSkywalker</Player1Name>
+    <Player1Score>1</Player1Score>
+  </PlayerStats>
+  <PlayerStats>
+    <GameID>2</GameID>
+    <GameDate>12/12/2013 1:09:01 PM</GameDate>
+    <Player2Name>Dalton</Player2Name>
+    <Player2Score>3</Player2Score>
+    <Player1Name>LukeSkywalker</Player1Name>
+    <Player1Score>3</Player1Score>
+  </PlayerStats>
+  <PlayerStats>
+    <GameID>3</GameID>
+    <GameDate>12/12/2013 1:10:06 PM</GameDate>
+    <Player2Name>Dalton</Player2Name>
+    <Player2Score>5</Player2Score>
+    <Player1Name>LukeSkywalker</Player1Name>
+    <Player1Score>1</Player1Score>
+  </PlayerStats>
+</NewDataSet>

@@ -116,8 +116,15 @@ namespace BoggleClient
         /// <param name="e"></param>
         private void BoggleClientController_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Handle the leave early
-            model.Disconnect();
+            try
+            {
+                // Handle the leave early
+                model.Disconnect();
+            }
+            catch
+            {
+
+            }         
         }
 
         #endregion
