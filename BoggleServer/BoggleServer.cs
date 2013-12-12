@@ -176,6 +176,8 @@ namespace BB
         /// <param name="payload"></param>
         private void WebRequestRetreived(string s, Exception e, object payload)
         {
+            bool error = true;
+
             if (s == null || s == "GET /favicon.ico HTTP/1.1\r")
             {
                 return;
@@ -405,6 +407,9 @@ namespace BB
 
                             foreach (char letter in bb)
                             {
+                                // Set the flag to not go to error messaging
+                                error = false;
+
                                 if (count % 4 == 0)
                                 {
                                     if (count != 15)
@@ -418,7 +423,7 @@ namespace BB
                                 count++;
                             }
 
-                            html.Append("</br>");
+                            html.Append("</table></br>");
                         }
                         catch (MySqlException ex)
                         {
@@ -427,53 +432,199 @@ namespace BB
                         }
                         #endregion
 
-                        #region Create Word Summary
+                        #region Create Game Stats
+
+                        string playerOneName = "";
+                        string playerTwoName = "";
+                        int playerOneID = 0;
+                        int playerTwoID = 0;
 
                         try
                         {
-                            Player player1 = new Player();
-                            Player player2 = new Player();
-
                             // Requery the database with the requested player as player two.
-                            string stm = "SELECT Player.PlayerName, Words.Word, Words.GameID, Words.Type FROM Words WHERE (Game.GameID = " + game[0] + ")";
+                            string stm = "SELECT Game.Player1Name, Game.Player1Score, Game.Player2Name, Game.Player2Score, Game.GameDate, Game.Player1ID, Game.Player2ID FROM Game WHERE (Game.GameID = " + game[0] + ")";
+
+                            MySqlCommand command = conn.CreateCommand();
+                            command.CommandText = stm;
+
+                            // Grab the player names from the given game id and create the table to display to the user
+                            using (MySqlDataReader reader = command.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    playerOneName = (string) reader["Player1Name"];
+                                    playerTwoName = (string)reader["Player2Name"];
+                                    playerOneID = (int)reader["Player1ID"];
+                                    playerTwoID = (int)reader["Player2ID"];
+
+                                    html.Append("<table border = '1'><tr><td>Player One Name</td><td>Player One Score</td><td>Player Two Name</td><td>Player Two Score</td><td> Game Date </td></tr>");
+
+                                    html.Append("<tr><td>" + playerOneName + "</td><td>" + reader["Player1Score"] + "</td><td>" + playerTwoName + "</td><td>" + reader["Player2Score"] + "</td><td>" + reader["GameDate"] + "</td></tr></table></br>");
+
+                                    break;
+                                }
+                            }
+                        }
+                        catch (Exception exc)
+                        {
+
+                        }
+
+                        #endregion
+
+                        #region Create 5 Part Word Summary
+
+                        try
+                        {
+                            html.Append("<table border = '1'>");
+
+                            #region Create Player One Legal Words
+
+                            // Find all legal words for playerOne for the given gameID
+                            string stm = "SELECT Words.Word FROM Words WHERE (Words.GameID = " + game[0] + ") AND (Words.Type = 'Legal') AND (Words.PlayerID = '" + playerOneID + "')";
+
                             MySqlDataAdapter da = new MySqlDataAdapter(stm, conn);
 
                             DataSet ds = new DataSet();
 
-                            da.Fill(ds, "WordStats");
-                            DataTable dt = ds.Tables["WordStats"];
+                            da.Fill(ds, "playerOneLegalWords");
+                            DataTable dt = ds.Tables["playerOneLegalWords"];
 
-                            dt.WriteXml("WordStats.xml");
+                            dt.WriteXml("playerOneLegalWords.xml");
 
-                            bool firstTime = true;
+                            html.Append("<tr><td>" + playerOneName + " Legal Words: </td>");
 
                             // Add all stats to the previously built html table
                             foreach (DataRow row in dt.Rows)
                             {
-
                                 foreach (DataColumn col in dt.Columns)
                                 {
-                                    // Name the players
-                                    if(firstTime)
-                                    {
-                                        if(player1.Name == null)
-                                            player1.Name = (string)row[col];
-                                        else if(player1.Name != (string)row[col] && player2.Name != null)
-                                            player2.Name = (string)row[col];
-                                    }
-                                    else
-
+                                    html.Append("<td>" + row[col] + "</td>");
                                 }
-
-                                firstTime = true;
                             }
+
+                            html.Append("</tr>");
+
+                            #endregion
+
+                            #region Create Player One Illegal Words
+
+                            // Find all legal words for playerOne for the given gameID
+                            stm = "SELECT Words.Word FROM Words WHERE (Words.GameID = " + game[0] + ") AND (Words.Type = 'Illegal') AND (Words.PlayerID = '" + playerOneID + "')";
+
+                            da = new MySqlDataAdapter(stm, conn);
+
+                            ds = new DataSet();
+
+                            da.Fill(ds, "playerOneIllegalWords");
+                            dt = ds.Tables["playerOneIllegalWords"];
+
+                            dt.WriteXml("playerOneIllegalWords.xml");
+
+                            html.Append("<tr><td>" + playerOneName + " Illegal Words: </td>");
+
+                            // Add all stats to the previously built html table
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+                            }
+
+                            html.Append("</tr>");
+
+                            #endregion
+
+                            #region Create Player Two Legal Words
+
+                            // Find all legal words for playerOne for the given gameID
+                            stm = "SELECT Words.Word FROM Words WHERE (Words.GameID = " + game[0] + ") AND (Words.Type = 'Legal') AND (Words.PlayerID = '" + playerTwoID + "')";
+
+                            da = new MySqlDataAdapter(stm, conn);
+
+                            ds = new DataSet();
+
+                            da.Fill(ds, "playerTwoLegalWords");
+                            dt = ds.Tables["playerTwoLegalWords"];
+
+                            dt.WriteXml("playerTwoLegalWords.xml");
+
+                            html.Append("<tr><td>" + playerTwoName + " Legal Words: </td>");
+
+                            // Add all stats to the previously built html table
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+                            }
+
+                            html.Append("</tr>");
+
+                            #endregion
+
+                            #region Create Player Two Illegal Words
+
+                            // Find all legal words for playerOne for the given gameID
+                            stm = "SELECT Words.Word FROM Words WHERE (Words.GameID = " + game[0] + ") AND (Words.Type = 'Illegal') AND (Words.PlayerID = '" + playerTwoID + "')";
+
+                            da = new MySqlDataAdapter(stm, conn);
+
+                            ds = new DataSet();
+
+                            da.Fill(ds, "playerTwoIllegalWords");
+                            dt = ds.Tables["playerTwoIllegalWords"];
+
+                            dt.WriteXml("playerTwoIllegalWords.xml");
+
+                            html.Append("<tr><td>" + playerTwoName + " Illegal Words: </td>");
+
+                            // Add all stats to the previously built html table
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+                            }
+
+                            html.Append("</tr>");
+
+                            #endregion
+
+                            #region Create Duplicate Words
+
+                            // Find all legal words for playerOne for the given gameID
+                            stm = "SELECT Words.Word FROM Words WHERE (Words.GameID = " + game[0] + ") AND (Words.Type = 'Duplicate') AND (Words.PlayerID = '" + playerOneID + "')";
+
+                            da = new MySqlDataAdapter(stm, conn);
+
+                            ds = new DataSet();
+
+                            da.Fill(ds, "DuplicateWords");
+                            dt = ds.Tables["DuplicateWords"];
+
+                            dt.WriteXml("DuplicateWords.xml");
+
+                            html.Append("<tr><td> Duplicate Words: </td>");
+
+                            // Add all stats to the previously built html table
+                            foreach (DataRow row in dt.Rows)
+                            {
+                                foreach (DataColumn col in dt.Columns)
+                                {
+                                    html.Append("<td>" + row[col] + "</td>");
+                                }
+                            }
+
+                            html.Append("</tr>");
+
+                            #endregion
 
                             // Close the table
                             html.Append("</table>");
-
-                            // Send the web page
-                            webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
-
                         }
                         catch (MySqlException ex)
                         {
@@ -482,7 +633,12 @@ namespace BB
                         }
                         #endregion
 
-                        webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
+                        // After every table is created then send the string
+                        if(!error)
+                            webSocket.BeginSend(html.ToString(), (exc1, o) => { webSocket.Close(); }, webSocket);
+                        else // Call error message helper method.
+                            webSocket.BeginSend(ErrorMessage(), (exc1, o) => { webSocket.Close(); }, webSocket);
+
                     }
 
                     #endregion
@@ -494,7 +650,7 @@ namespace BB
                     {
                         // Send back an HTML page containing an error message
 
-                        webSocket.BeginSend("<h1>Test 4 </h1>", (exc1, o) => { webSocket.Close(); }, webSocket);
+                        webSocket.BeginSend(ErrorMessage(), (exc1, o) => { webSocket.Close(); }, webSocket);
                     }
 
                     #endregion
@@ -505,6 +661,10 @@ namespace BB
             }
         }
 
+        private String ErrorMessage()
+        {
+            return "<p>We do not recognize this command.  The commands we do recognize include: </br></br> http://IPaddress:2500/players </br> http://IPaddress:2500/games?player=PlayerName </br> http://IPaddress:2500/game?id=GameID</br></br>  Potential problems may include an invalid Game ID.  Please try again with a valid command or a valid Game ID.</p>";
+        }
         /// <summary>
         /// This method is called when boggleServer.BeginAcceptSocket receives an incoming connection
         /// to the server
