@@ -54,7 +54,7 @@ namespace BB
         /// <param name="args"></param>
         static void Main(string[] args)
         {
-            args = new String[] { "45", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
+            //args = new String[] { "45", "C:/Users/Dalton/Desktop/School/CS 3500/Assignments/PS8Git/dictionary.txt", "" };
 
             // Check to see that the appropriate number of arguments has been passed
             // to the server via the string[] args
@@ -933,11 +933,12 @@ namespace BB
         #region Post Game
 
         /// <summary>
-        /// Stop the TCP Listener
+        /// Stop the TCP Listeners
         /// </summary>
         public void Stop()
         {
             boggleServer.Stop();
+            webServer.Stop();
         }
 
         #endregion

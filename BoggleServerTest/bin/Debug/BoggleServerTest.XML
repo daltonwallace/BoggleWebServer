@@ -4,5 +4,44 @@
         <name>BoggleServerTest</name>
     </assembly>
     <members>
+        <member name="M:BoggleServerTest.UnitTest1.TestIllegalScoreKeeping">
+            <summary>
+            Test to ensure that scoring an illegal word one time works correctly
+            </summary>
+        </member>
+        <member name="M:BoggleServerTest.UnitTest1.TestMultipleIllegalScoreKeeping">
+            <summary>
+            Test to ensure that the same illegal word played twice doesn't result
+            in another player penalty
+            </summary>
+        </member>
+        <member name="M:BoggleServerTest.UnitTest1.TestMultipleLegalScoreKeeping">
+            <summary>
+            Test to ensure that a valid word, played twice by
+            the same player does not increase the players score
+            </summary>
+        </member>
+        <member name="M:BoggleServerTest.UnitTest1.TestDuplicateLegalScoreKeeping">
+            <summary>
+            Test to ensure that if both players
+            play same word, then the score is redacted
+            </summary>
+        </member>
+        <member name="M:BoggleServerTest.UnitTest1.TestIgnoreFunctionality">
+            <summary>
+            Test the IGNORE functionality for a player
+            </summary>
+        </member>
+        <member name="M:BoggleServerTest.UnitTest1.TestSummary">
+            <summary>
+            Tests the summary functionality for one players
+            </summary>
+        </member>
+        <member name="M:BoggleServerTest.UnitTest1.TestABetterWay">
+            <summary>
+            Tests the IGNORE Before a game begins as well as testing the regular progression of a game
+            ending with the summary
+            </summary>
+        </member>
     </members>
 </doc>

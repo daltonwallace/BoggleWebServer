@@ -65,7 +65,7 @@
         </member>
         <member name="M:BB.BoggleServer.Stop">
             <summary>
-            Stop the TCP Listener
+            Stop the TCP Listeners
             </summary>
         </member>
         <member name="T:BB.BoggleServer.Game">
